@@ -108,19 +108,6 @@
                     <div class="panel-header">Scheme Parameters</div>
                     <div class="panel-body">
                         <div class="form-group">
-                            <label>Region</label>
-                            <select id="estRegion">
-                                <option value="london">London (+30%)</option>
-                                <option value="south_east">South East (+15%)</option>
-                                <option value="west_midlands">West Midlands (+5%)</option>
-                                <option value="north_west">North West (-5%)</option>
-                                <option value="east_midlands" selected>East Midlands (Base)</option>
-                                <option value="east_of_england">East of England (+10%)</option>
-                                <option value="south_west">South West (+5%)</option>
-                                <option value="north_east">North East (-10%)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label>Scheme Type</label>
                             <select id="estType">
                                 <option value="big_box">Big Box (&gt;150k sqft/unit)</option>
@@ -168,9 +155,9 @@
             <div class="panel" style="margin-top: 20px;">
                 <div class="panel-header">Methodology</div>
                 <div class="panel-body" style="color: #94a3b8; font-size: 0.85rem; line-height: 1.6;">
-                    <p><strong>Base costs</strong> include shell build, prelims, and OHP — excludes abnormals, contingency, and professional fees.</p>
-                    <p style="margin-top: 10px;"><strong>Regional adjustments</strong> based on 116 KAM cost plans (Oct 2022 – Feb 2026). East Midlands used as base.</p>
-                    <p style="margin-top: 10px;"><strong>Confidence:</strong> Higher for scheme types/regions with more data points. Big Box and Mid Box have strongest coverage.</p>
+                    <p><strong>Comparable matching:</strong> Finds the 5 most similar schemes from 116 KAM cost plans based on unit size (80% weight) and total GIA (20% weight).</p>
+                    <p style="margin-top: 10px;"><strong>All-in costs</strong> include shell build, prelims, OHP, and standard site costs. Abnormals (demolition, ground, etc.) added separately.</p>
+                    <p style="margin-top: 10px;"><strong>Match %</strong> shows how similar each comparable is to your inputs. Higher = more relevant.</p>
                 </div>
             </div>
         </div>
@@ -461,18 +448,14 @@
             });
         }
         
-        // Base costs by type (East Midlands baseline)
-        const baseCosts = { big_box: 59, mid_box: 83, mli: 107, multi_storey: 156 };
-        const allInCosts = { big_box: 85, mid_box: 105, mli: 130, multi_storey: 191 };
-        const regionMults = { london: 1.30, south_east: 1.15, west_midlands: 1.05, north_west: 0.95, east_midlands: 1.0, east_of_england: 1.10, south_west: 1.05, north_east: 0.90 };
-        const typeDataPoints = { big_box: 14, mid_box: 59, mli: 41, multi_storey: 2 };
-        const regionDataPoints = { london: 35, south_east: 58, west_midlands: 3, north_west: 4, east_midlands: 8, east_of_england: 3, south_west: 2, north_east: 3 };
+        // Full comparable dataset
+        const comparables = [{"name":"St Andrews Way, Bromley by Bow","loc":"Bromley by Bow","type":"mid_box","gia":207655,"units":7,"avgUnit":29665,"base":87.9,"allIn":120.3,"budget":24976000},{"name":"Collet Way Rev 2","loc":"Southall","type":"mli","gia":31435,"units":4,"avgUnit":7859,"base":135.0,"allIn":168.5,"budget":5297000},{"name":"Park Royal - Western Ave","loc":"Park Royal","type":"mli","gia":111640,"units":6,"avgUnit":18607,"base":110.2,"allIn":125.0,"budget":13949000},{"name":"Croydon Single Unit Rev 3","loc":"Coomber Way, Croydon","type":"mid_box","gia":54475,"units":1,"avgUnit":54475,"base":85,"allIn":102.6,"budget":5589000},{"name":"Bromley Rev 8","loc":"Bromley","type":"mli","gia":85525,"units":9,"avgUnit":9503,"base":125.2,"allIn":147.7,"budget":12630000},{"name":"Austin Drive Coventry","loc":"Coventry","type":"mli","gia":149805,"units":8,"avgUnit":18726,"base":70.6,"allIn":93.9,"budget":14062000},{"name":"Bromley","loc":"Bromley","type":"mli","gia":81430,"units":9,"avgUnit":9048,"base":121.9,"allIn":147.8,"budget":12033000},{"name":"Dell, Bracknell","loc":"Bracknell","type":"mid_box","gia":150950,"units":2,"avgUnit":75475,"base":81.7,"allIn":104.2,"budget":15737000},{"name":"Stirling Way","loc":"Borehamwood","type":"mli","gia":50630,"units":5,"avgUnit":10126,"base":122.6,"allIn":140.8,"budget":7129000},{"name":"Eastman Way","loc":"Hemel Hempstead","type":"mid_box","gia":143880,"units":1,"avgUnit":143880,"base":68.0,"allIn":86.6,"budget":12454000},{"name":"Chesford Grange","loc":"Warrington","type":"mid_box","gia":147315,"units":2,"avgUnit":73658,"base":66.9,"allIn":81.8,"budget":12052000},{"name":"Montrose Road","loc":"Chelmsford","type":"mid_box","gia":65895,"units":1,"avgUnit":65895,"base":78.0,"allIn":109.0,"budget":7182000},{"name":"Howard Way","loc":"Harlow","type":"mid_box","gia":94804,"units":3,"avgUnit":31601,"base":79.7,"allIn":111.9,"budget":10607000},{"name":"29 Mollison Avenue","loc":"Enfield","type":"mli","gia":70380,"units":8,"avgUnit":8798,"base":99.2,"allIn":140.4,"budget":9883000},{"name":"DHL Building","loc":"Salford","type":"mid_box","gia":114385,"units":2,"avgUnit":57192,"base":86.4,"allIn":106.2,"budget":12151000},{"name":"Middleton Industrial","loc":"Guildford","type":"mli","gia":69120,"units":3,"avgUnit":23040,"base":104.3,"allIn":118.6,"budget":8198000},{"name":"Ashley Road","loc":"St Albans","type":"mli","gia":49170,"units":6,"avgUnit":8195,"base":118,"allIn":135.9,"budget":6683000},{"name":"Stirling Way SU","loc":"Borehamwood","type":"mid_box","gia":50310,"units":1,"avgUnit":50310,"base":80.0,"allIn":108.6,"budget":5465000},{"name":"Goldington Road","loc":"Bedford","type":"mid_box","gia":210000,"units":7,"avgUnit":30000,"base":97.7,"allIn":116.4,"budget":24445000},{"name":"Bolney Grange","loc":"Bolney","type":"mid_box","gia":251811,"units":7,"avgUnit":35973,"base":92.6,"allIn":107.9,"budget":27181000},{"name":"Borehamwood Rowley","loc":"Borehamwood","type":"mid_box","gia":116855,"units":1,"avgUnit":116855,"base":78,"allIn":98.3,"budget":11486000},{"name":"Ferndown","loc":"Bournemouth","type":"mid_box","gia":110663,"units":3,"avgUnit":36888,"base":116.7,"allIn":134.1,"budget":14844000},{"name":"Boehringer Bracknell","loc":"Bracknell","type":"mid_box","gia":130065,"units":2,"avgUnit":65032,"base":88.7,"allIn":105.2,"budget":13685000},{"name":"Cox Lane","loc":"Chessington","type":"mid_box","gia":91500,"units":3,"avgUnit":30500,"base":90.3,"allIn":115.2,"budget":10544000},{"name":"Chessington Base","loc":"Chessington","type":"mli","gia":93300,"units":7,"avgUnit":13329,"base":128.9,"allIn":149.2,"budget":13918000},{"name":"Horatius Way","loc":"Croydon","type":"mli","gia":120940,"units":9,"avgUnit":13438,"base":115.6,"allIn":147.3,"budget":17816500},{"name":"Horatius Way v2","loc":"Croydon","type":"mli","gia":110550,"units":5,"avgUnit":22110,"base":89.1,"allIn":114.4,"budget":12646000},{"name":"Marlowe Way","loc":"Croydon","type":"mli","gia":73395,"units":5,"avgUnit":14679,"base":107.8,"allIn":126.5,"budget":9287000},{"name":"Enderby Park","loc":"Leicester","type":"big_box","gia":1131200,"units":7,"avgUnit":161600,"base":59.5,"allIn":72.0,"budget":81483000},{"name":"M1 Junction 21","loc":"Nottingham","type":"big_box","gia":699675,"units":3,"avgUnit":233225,"base":57.3,"allIn":68.0,"budget":47594000},{"name":"Waxlox Road","loc":"Park Royal","type":"mli","gia":88875,"units":4,"avgUnit":22219,"base":89.4,"allIn":114.4,"budget":10167000},{"name":"Colthrop Lane","loc":"Thatcham","type":"mid_box","gia":70152,"units":2,"avgUnit":35076,"base":93.8,"allIn":115.9,"budget":8133000},{"name":"Veridion Way BB","loc":"Thamesmead","type":"big_box","gia":884565,"units":5,"avgUnit":176913,"base":60.9,"allIn":96.3,"budget":85175000},{"name":"Veridion Way MB","loc":"Thamesmead","type":"mid_box","gia":838450,"units":13,"avgUnit":64496,"base":81.3,"allIn":116.5,"budget":97649000},{"name":"Tolpits Lane","loc":"Watford","type":"mid_box","gia":132165,"units":4,"avgUnit":33041,"base":88.2,"allIn":118.8,"budget":15695000},{"name":"Deer Park Wimbledon","loc":"Wimbledon","type":"mli","gia":111085,"units":6,"avgUnit":18514,"base":97.3,"allIn":113.2,"budget":12573000},{"name":"Banbury","loc":"Banbury","type":"mid_box","gia":439170,"units":10,"avgUnit":43917,"base":81.8,"allIn":103.9,"budget":45635000},{"name":"Kings Road","loc":"Birmingham","type":"mli","gia":79295,"units":4,"avgUnit":19824,"base":94.1,"allIn":108.5,"budget":8606000},{"name":"Bracknell Dell","loc":"Bracknell","type":"mid_box","gia":145580,"units":2,"avgUnit":72790,"base":82.4,"allIn":105.3,"budget":15336000},{"name":"Coomber Way","loc":"Croydon","type":"mli","gia":54180,"units":4,"avgUnit":13545,"base":127.2,"allIn":150.3,"budget":8144000},{"name":"Lincoln Road","loc":"Enfield","type":"mli","gia":110605,"units":8,"avgUnit":13826,"base":99.9,"allIn":115.8,"budget":12801600},{"name":"Gloucester BP","loc":"Gloucester","type":"mid_box","gia":338145,"units":11,"avgUnit":30740,"base":91.6,"allIn":110.4,"budget":37323000},{"name":"Barton Dock","loc":"Manchester","type":"mid_box","gia":177385,"units":4,"avgUnit":44346,"base":85.2,"allIn":101.8,"budget":18061000},{"name":"Bakewell Road","loc":"Peterborough","type":"mid_box","gia":131955,"units":3,"avgUnit":43985,"base":85.0,"allIn":106.4,"budget":14041000},{"name":"Britannia Road","loc":"Waltham Cross","type":"mli","gia":75870,"units":4,"avgUnit":18968,"base":96.0,"allIn":121.5,"budget":9218000},{"name":"Blackhorse Lane","loc":"Walthamstow","type":"mli","gia":149258,"units":9,"avgUnit":16584,"base":121.7,"allIn":134.9,"budget":19954000},{"name":"Tolpits Lane MLI","loc":"Watford","type":"mli","gia":73175,"units":5,"avgUnit":14635,"base":115.9,"allIn":141.3,"budget":10376000},{"name":"Orphanage Road","loc":"Watford","type":"mli","gia":92040,"units":5,"avgUnit":18408,"base":92.4,"allIn":116.3,"budget":10699000},{"name":"Leeds Unit 1","loc":"Leeds","type":"big_box","gia":157500,"units":1,"avgUnit":157500,"base":64,"allIn":78.7,"budget":12388000},{"name":"Inova Park","loc":"Leicester","type":"mid_box","gia":560873,"units":6,"avgUnit":93479,"base":67.9,"allIn":110.8,"budget":62143520},{"name":"SKF Luton","loc":"Luton","type":"mid_box","gia":333815,"units":5,"avgUnit":66763,"base":72.4,"allIn":81.8,"budget":27296336},{"name":"Gaydon","loc":"Leamington Spa","type":"mid_box","gia":407106,"units":6,"avgUnit":67851,"base":78.0,"allIn":95.4,"budget":38848000},{"name":"Horsecroft Lane","loc":"Harlow","type":"mid_box","gia":88065,"units":1,"avgUnit":88065,"base":79,"allIn":100.5,"budget":8846425},{"name":"Bolney Grange MLI","loc":"Bolney","type":"mli","gia":225775,"units":11,"avgUnit":20525,"base":85.1,"allIn":98.4,"budget":22195000},{"name":"Veridion MS","loc":"Thamesmead","type":"multi_storey","gia":1574420,"units":4,"avgUnit":393605,"base":155.5,"allIn":190.8,"budget":307435000}];
         
         function calculateEstimate() {
-            const region = document.getElementById('estRegion').value;
             const type = document.getElementById('estType').value;
             const gia = parseFloat(document.getElementById('estGIA').value) || 0;
             const units = parseInt(document.getElementById('estUnits').value) || 1;
+            const targetAvgUnit = gia / units;
             
             // Calculate abnormals
             let abnormalPsf = 0;
@@ -483,37 +466,63 @@
             if (document.getElementById('abnGround').checked) abnormalPsf += 5;
             if (document.getElementById('abnContam').checked) abnormalPsf += 10;
             
-            // Calculate costs
-            const basePsf = baseCosts[type] * regionMults[region];
-            const allInPsf = allInCosts[type] * regionMults[region];
-            const totalPsfWithAbnormals = allInPsf + abnormalPsf;
-            const totalBudget = totalPsfWithAbnormals * gia;
-            const avgUnitSize = gia / units;
+            // Find comparables - type must match, then score by unit size similarity (80%) and total GIA (20%)
+            const scored = comparables
+                .filter(c => c.type === type && c.allIn > 0)
+                .map(c => {
+                    const unitSizeDiff = Math.abs(c.avgUnit - targetAvgUnit) / Math.max(c.avgUnit, targetAvgUnit);
+                    const giaDiff = Math.abs(c.gia - gia) / Math.max(c.gia, gia);
+                    const score = (1 - unitSizeDiff) * 0.8 + (1 - giaDiff) * 0.2;
+                    return { ...c, score, unitSizeDiff, giaDiff };
+                })
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 5);
             
-            // Confidence based on data points
-            const typeConf = Math.min(typeDataPoints[type] / 15, 1);
-            const regionConf = Math.min(regionDataPoints[region] / 20, 1);
-            const overallConf = (typeConf + regionConf) / 2;
-            const confPct = Math.round(overallConf * 100);
-            const confColor = confPct >= 70 ? '#22c55e' : confPct >= 40 ? '#eab308' : '#ef4444';
-            const confLabel = confPct >= 70 ? 'High' : confPct >= 40 ? 'Medium' : 'Low';
+            if (scored.length === 0) {
+                document.getElementById('estResults').innerHTML = '<p style="color: #ef4444; text-align: center; padding: 40px;">No comparable schemes found for this type.</p>';
+                return;
+            }
+            
+            // Weighted average from top comparables (weight by score)
+            const totalWeight = scored.reduce((sum, c) => sum + c.score, 0);
+            const weightedAllIn = scored.reduce((sum, c) => sum + c.allIn * c.score, 0) / totalWeight;
+            const weightedBase = scored.reduce((sum, c) => sum + (c.base || 0) * c.score, 0) / totalWeight;
+            const minAllIn = Math.min(...scored.map(c => c.allIn));
+            const maxAllIn = Math.max(...scored.map(c => c.allIn));
+            
+            const estAllIn = weightedAllIn + abnormalPsf;
+            const totalBudget = estAllIn * gia;
+            const minBudget = (minAllIn + abnormalPsf) * gia;
+            const maxBudget = (maxAllIn + abnormalPsf) * gia;
+            
+            // Build comparables table
+            const compRows = scored.map((c, i) => `
+                <tr style="${i === 0 ? 'background: rgba(59,130,246,0.1);' : ''}">
+                    <td>${c.name}</td>
+                    <td class="num">${c.avgUnit.toLocaleString()}</td>
+                    <td class="num">${c.gia.toLocaleString()}</td>
+                    <td class="num">£${c.allIn.toFixed(0)}</td>
+                    <td class="num">${Math.round(c.score * 100)}%</td>
+                </tr>
+            `).join('');
             
             document.getElementById('estResults').innerHTML = `
-                <div class="est-row"><span class="est-label">Base Build Cost</span><span class="est-value">£${basePsf.toFixed(0)}/sqft</span></div>
-                <div class="est-row"><span class="est-label">All-In (excl. abnormals)</span><span class="est-value">£${allInPsf.toFixed(0)}/sqft</span></div>
-                <div class="est-row"><span class="est-label">+ Abnormals</span><span class="est-value">£${abnormalPsf}/sqft</span></div>
-                <div class="est-row"><span class="est-label">Total Cost</span><span class="est-value highlight">£${totalPsfWithAbnormals.toFixed(0)}/sqft</span></div>
-                <div class="est-row"><span class="est-label">Avg Unit Size</span><span class="est-value">${avgUnitSize.toLocaleString()} sqft</span></div>
-                
-                <div class="est-total">
+                <div class="est-total" style="margin-bottom: 20px;">
                     <div class="est-total-label">Estimated Total Budget</div>
                     <div class="est-total-value">£${(totalBudget / 1000000).toFixed(2)}M</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 8px;">Range: £${(minBudget / 1000000).toFixed(1)}M - £${(maxBudget / 1000000).toFixed(1)}M</div>
                 </div>
                 
-                <div class="est-confidence">
-                    <span class="conf-label">Confidence: ${confLabel}</span>
-                    <div class="conf-bar"><div class="conf-fill" style="width: ${confPct}%; background: ${confColor};"></div></div>
-                </div>
+                <div class="est-row"><span class="est-label">Est. All-In Cost</span><span class="est-value highlight">£${estAllIn.toFixed(0)}/sqft</span></div>
+                <div class="est-row"><span class="est-label">Base Build (avg)</span><span class="est-value">£${weightedBase.toFixed(0)}/sqft</span></div>
+                <div class="est-row"><span class="est-label">+ Abnormals</span><span class="est-value">£${abnormalPsf}/sqft</span></div>
+                <div class="est-row"><span class="est-label">Avg Unit Size</span><span class="est-value">${targetAvgUnit.toLocaleString()} sqft</span></div>
+                
+                <h4 style="margin: 25px 0 12px; font-size: 0.85rem; color: #94a3b8; text-transform: uppercase;">Top 5 Comparable Schemes</h4>
+                <table class="data-table" style="font-size: 0.8rem;">
+                    <thead><tr><th>Scheme</th><th class="num">Unit Size</th><th class="num">Total GIA</th><th class="num">All-In</th><th class="num">Match</th></tr></thead>
+                    <tbody>${compRows}</tbody>
+                </table>
             `;
         }
         
