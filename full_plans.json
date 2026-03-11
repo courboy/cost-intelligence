@@ -1,1 +1,173 @@
-[{"id":"CP001","project":"St Andrews Way, Bromley by Bow","location":"Bromley by Bow","region":"Unknown","date":"2023-01-04","total_budget_cost":24976000,"total_gia_sqft":207655,"base_build_psf":87.91,"total_budget_psf":120.28,"number_of_units":7,"scheme_type":"mid_box"},{"id":"CP002","project":"Collet Way Rev 2","location":"Southall","region":"Unknown","date":"2024-08-02","total_budget_cost":5297000,"total_gia_sqft":31435,"base_build_psf":135.0,"total_budget_psf":168.49,"number_of_units":4,"scheme_type":"mli"},{"id":"CP003","project":"Park Royal - Western Ave","location":"Park Royal","region":"Unknown","date":"2024-06-13","total_budget_cost":13949000,"total_gia_sqft":111640,"base_build_psf":110.22,"total_budget_psf":124.95,"number_of_units":6,"scheme_type":"mli"},{"id":"CP004","project":"Croydon Single Unit Rev 3","location":"Coomber Way, Croydon","region":"Unknown","date":"2024-07-08","total_budget_cost":5589000,"total_gia_sqft":54475,"base_build_psf":85,"total_budget_psf":102.6,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP005","project":"Bromley Rev 8","location":"Bromley","region":"Unknown","date":"2024-10-07","total_budget_cost":12630000,"total_gia_sqft":85525,"base_build_psf":125.24,"total_budget_psf":147.68,"number_of_units":9,"scheme_type":"mli"},{"id":"CP006","project":"Croydon Single Unit Rev 4","location":"Coomber Way, Croydon","region":"Unknown","date":"2024-07-10","total_budget_cost":5711000,"total_gia_sqft":54475,"base_build_psf":85,"total_budget_psf":104.84,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP007","project":"Austin Drive Coventry","location":"Austin Drive, Coventry","region":"Unknown","date":"2023-02-24","total_budget_cost":14062000,"total_gia_sqft":149805,"base_build_psf":70.58,"total_budget_psf":93.87,"number_of_units":8,"scheme_type":"mli"},{"id":"CP008","project":"Bromley","location":"Bromley","region":"Unknown","date":"2024-06-19","total_budget_cost":12033000,"total_gia_sqft":81430,"base_build_psf":121.87,"total_budget_psf":147.78,"number_of_units":9,"scheme_type":"mli"},{"id":"CP009","project":"Dell, Bracknell","location":"Bracknell","region":"Unknown","date":"2023-03-28","total_budget_cost":15737000,"total_gia_sqft":150950,"base_build_psf":81.68,"total_budget_psf":104.25,"number_of_units":2,"scheme_type":"mid_box"},{"id":"CP010","project":"Collet Way Rev 3 (4-Unit)","location":"Southall","region":"Unknown","date":"2024-10-07","total_budget_cost":5733000,"total_gia_sqft":31435,"base_build_psf":132.5,"total_budget_psf":182.33,"number_of_units":4,"scheme_type":"mli"},{"id":"CP011","project":"Stirling Way","location":"Borehamwood","region":"Unknown","date":"2023-04-11","total_budget_cost":7129000,"total_gia_sqft":50630,"base_build_psf":122.56,"total_budget_psf":140.82,"number_of_units":5,"scheme_type":"mli"},{"id":"CP012","project":"Bromley Rev 4","location":"Bromley","region":"Unknown","date":"2024-07-12","total_budget_cost":11609000,"total_gia_sqft":81430,"base_build_psf":121.88,"total_budget_psf":142.57,"number_of_units":9,"scheme_type":"mli"},{"id":"CP013","project":"Eastman Way - Option 02","location":"Hemel Hempstead","region":"Unknown","date":"2023-04-25","total_budget_cost":12454000,"total_gia_sqft":143880,"base_build_psf":68.0,"total_budget_psf":86.56,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP014","project":"Chesford Grange Warrington","location":"Warrington","region":"Unknown","date":"2023-02-17","total_budget_cost":12052000,"total_gia_sqft":147315,"base_build_psf":66.9,"total_budget_psf":81.81,"number_of_units":2,"scheme_type":"mid_box"},{"id":"CP015","project":"Montrose Road, Chelmsford","location":"Chelmsford","region":"Unknown","date":"2023-05-16","total_budget_cost":7182000,"total_gia_sqft":65895,"base_build_psf":78.05,"total_budget_psf":108.99,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP016","project":"Park Royal - Western Ave","location":"Park Royal","region":"Unknown","date":"2024-06-13","total_budget_cost":11078000,"total_gia_sqft":113430,"base_build_psf":85.25,"total_budget_psf":97.67,"number_of_units":2,"scheme_type":"mid_box"},{"id":"CP017","project":"Howard Way, Harlow","location":"Harlow","region":"Unknown","date":"2024-02-06","total_budget_cost":10607000,"total_gia_sqft":94804,"base_build_psf":79.7,"total_budget_psf":111.88,"number_of_units":3,"scheme_type":"mid_box"},{"id":"CP018","project":"29 Mollison Avenue","location":"29 Mollison Avenue","region":"Unknown","date":"2023-04-14","total_budget_cost":9883000,"total_gia_sqft":70380,"base_build_psf":99.16,"total_budget_psf":140.42,"number_of_units":8,"scheme_type":"mli"},{"id":"CP019","project":"Stirling Way","location":"Borehamwood","region":"Unknown","date":"2023-04-16","total_budget_cost":7281000,"total_gia_sqft":50630,"base_build_psf":122.53,"total_budget_psf":143.82,"number_of_units":5,"scheme_type":"mli"},{"id":"CP020","project":"Croydon Single Unit","location":"Coomber Way, Croydon","region":"Unknown","date":"2024-07-02","total_budget_cost":4839000,"total_gia_sqft":54475,"base_build_psf":82,"total_budget_psf":88.83,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP021","project":"Bromley Rev 7","location":"Bromley","region":"Unknown","date":"2024-08-02","total_budget_cost":11650000,"total_gia_sqft":81430,"base_build_psf":121.88,"total_budget_psf":143.07,"number_of_units":9,"scheme_type":"mli"},{"id":"CP022","project":"Bromley Rev 3","location":"Bromley","region":"Unknown","date":"2024-07-10","total_budget_cost":11474000,"total_gia_sqft":80920,"base_build_psf":121.28,"total_budget_psf":141.8,"number_of_units":10,"scheme_type":"mli"},{"id":"CP023","project":"Bromley Rev 9 (Travis Perkins)","location":"Bromley","region":"Unknown","date":"2024-10-07","total_budget_cost":8926000,"total_gia_sqft":58990,"base_build_psf":119.32,"total_budget_psf":151.31,"number_of_units":5,"scheme_type":"mli"},{"id":"CP024","project":"DHL Building, Salford","location":"Salford","region":"Unknown","date":"2022-10-24","total_budget_cost":12151000,"total_gia_sqft":114385,"base_build_psf":86.37,"total_budget_psf":106.23,"number_of_units":2,"scheme_type":"mid_box"},{"id":"CP025","project":"Bromley Rev 5 (with self storage)","location":"Bromley","region":"Unknown","date":"2024-07-24","total_budget_cost":7986000,"total_gia_sqft":56855,"base_build_psf":120,"total_budget_psf":140.47,"number_of_units":4,"scheme_type":"mli"},{"id":"CP026","project":"Croydon Single Unit Rev 2","location":"Coomber Way, Croydon","region":"Unknown","date":"2024-07-04","total_budget_cost":5485000,"total_gia_sqft":54475,"base_build_psf":85,"total_budget_psf":100.69,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP027","project":"Eastman Way","location":"Hemel Hempstead","region":"Unknown","date":"2024-04-27","total_budget_cost":11642000,"total_gia_sqft":135875,"base_build_psf":68.0,"total_budget_psf":85.68,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP028","project":"Middleton Industrial Estate","location":"Guildford","region":"Unknown","date":"2024-05-02","total_budget_cost":8198000,"total_gia_sqft":69120,"base_build_psf":104.35,"total_budget_psf":118.6,"number_of_units":3,"scheme_type":"mli"},{"id":"CP029","project":"Bromley Rev 6","location":"Bromley","region":"Unknown","date":"2024-07-31","total_budget_cost":11495000,"total_gia_sqft":81430,"base_build_psf":121.88,"total_budget_psf":141.17,"number_of_units":9,"scheme_type":"mli"},{"id":"CP030","project":"Ashley Road","location":"St Albans","region":"Unknown","date":"2024-06-26","total_budget_cost":6683000,"total_gia_sqft":49170,"base_build_psf":118,"total_budget_psf":135.94,"number_of_units":6,"scheme_type":"mli"},{"id":"CP031","project":"Stirling Way","location":"Borehamwood","region":"Unknown","date":"2023-04-16","total_budget_cost":5164000,"total_gia_sqft":50310,"base_build_psf":80.0,"total_budget_psf":102.64,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP032","project":"Stirling Way Single Unit Rev 2","location":"Borehamwood","region":"Unknown","date":"2024-12-09","total_budget_cost":5465000,"total_gia_sqft":50310,"base_build_psf":80.0,"total_budget_psf":108.63,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP033","project":"Stirling Way Rev 3","location":"Borehamwood","region":"Unknown","date":"2025-02-24","total_budget_cost":5585000,"total_gia_sqft":50310,"base_build_psf":80.0,"total_budget_psf":111.01,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP034","project":"Goldington Road","location":"Bedford","region":"Unknown","date":"2025-06-06","total_budget_cost":24445000,"total_gia_sqft":210000,"base_build_psf":97.67,"total_budget_psf":116.4,"number_of_units":7,"scheme_type":"mid_box"},{"id":"CP035","project":"Bolney Grange","location":"Stairbridge Lane, Bolney Grang","region":"Unknown","date":"2025-09-18","total_budget_cost":27181000,"total_gia_sqft":251811,"base_build_psf":92.61,"total_budget_psf":107.94,"number_of_units":7,"scheme_type":"mid_box"},{"id":"CP036","project":"Borehamwood","location":"Rowley Lane, Boreham Wood","region":"Unknown","date":"2025-03-25","total_budget_cost":11486000,"total_gia_sqft":116855,"base_build_psf":78,"total_budget_psf":98.3,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP037","project":"Ferndown","location":"Ferndown, Bournemouth","region":"Unknown","date":"2025-11-05","total_budget_cost":14844000,"total_gia_sqft":110663,"base_build_psf":116.68,"total_budget_psf":134.13,"number_of_units":3,"scheme_type":"mid_box"},{"id":"CP038","project":"Boehringer site","location":"Bracknell","region":"Unknown","date":"2025-03-28","total_budget_cost":13685000,"total_gia_sqft":130065,"base_build_psf":88.7,"total_budget_psf":105.22,"number_of_units":2,"scheme_type":"mid_box"},{"id":"CP039","project":"Boehringer site Rev 2","location":"Bracknell","region":"Unknown","date":"2025-10-30","total_budget_cost":14720000,"total_gia_sqft":130720,"base_build_psf":90.72,"total_budget_psf":112.61,"number_of_units":3,"scheme_type":"mid_box"},{"id":"CP040","project":"Cox Lane","location":"Chessington","region":"Unknown","date":"2025-10-01","total_budget_cost":10544000,"total_gia_sqft":91500,"base_build_psf":90.28,"total_budget_psf":115.24,"number_of_units":3,"scheme_type":"mid_box"},{"id":"CP041","project":"Chessington Base","location":"Surrey, KT19 1SG","region":"Unknown","date":"2025-07-29","total_budget_cost":13918000,"total_gia_sqft":93300,"base_build_psf":128.89,"total_budget_psf":149.23,"number_of_units":7,"scheme_type":"mli"},{"id":"CP042","project":"Croydon","location":"Horatius Way, Croydon","region":"Unknown","date":"2023-10-25","total_budget_cost":17816500,"total_gia_sqft":120940,"base_build_psf":115.57,"total_budget_psf":147.32,"number_of_units":9,"scheme_type":"mli"},{"id":"CP043","project":"Horatius Way","location":"Croydon","region":"Unknown","date":"2025-06-13","total_budget_cost":12646000,"total_gia_sqft":110550,"base_build_psf":89.12,"total_budget_psf":114.44,"number_of_units":5,"scheme_type":"mli"},{"id":"CP044","project":"Horatius Way","location":"Croydon","region":"Unknown","date":"2025-06-23","total_budget_cost":12764000,"total_gia_sqft":110570,"base_build_psf":77.5,"total_budget_psf":115.44,"number_of_units":5,"scheme_type":"mli"},{"id":"CP045","project":"Croydon","location":"Marlowe Way","region":"Unknown","date":"2025-09-29","total_budget_cost":9287000,"total_gia_sqft":73395,"base_build_psf":107.76,"total_budget_psf":126.53,"number_of_units":5,"scheme_type":"mli"},{"id":"CP046","project":"Daventry","location":"Daventry, Northamptonshire","region":"Unknown","date":"2025-10-31","total_budget_cost":6717000,"total_gia_sqft":60815,"base_build_psf":72.5,"total_budget_psf":110.45,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP047","project":"Enderby Logistics Park - EvoLake","location":"Enderby, Leicester","region":"Unknown","date":"2024-12-18","total_budget_cost":81483000,"total_gia_sqft":1131200,"base_build_psf":59.45,"total_budget_psf":72.03,"number_of_units":7,"scheme_type":"big_box"},{"id":"CP048","project":"Enderby Logistics Park - EvoLake","location":"Enderby, Leicester","region":"Unknown","date":"2024-12-20","total_budget_cost":81094000,"total_gia_sqft":1131200,"base_build_psf":59.45,"total_budget_psf":71.69,"number_of_units":7,"scheme_type":"big_box"},{"id":"CP049","project":"Enderby Logistics Park - EvoLake","location":"Enderby, Leicester","region":"Unknown","date":"2025-01-24","total_budget_cost":78103000,"total_gia_sqft":1147126,"base_build_psf":56.08,"total_budget_psf":68.09,"number_of_units":4,"scheme_type":"big_box"},{"id":"CP050","project":"29 Mollison Avenue","location":"29 Mollison Avenue","region":"Unknown","date":"2025-02-17","total_budget_cost":9666000,"total_gia_sqft":70380,"base_build_psf":94.79,"total_budget_psf":137.34,"number_of_units":8,"scheme_type":"mli"},{"id":"CP051","project":"Gaydon","location":"Royal Leamington Spa","region":"Unknown","date":"2025-09-05","total_budget_cost":38848000,"total_gia_sqft":407106,"base_build_psf":78.0,"total_budget_psf":95.42,"number_of_units":6,"scheme_type":"mid_box"},{"id":"CP052","project":"Horsecroft Lane - Site 1","location":"Harlow","region":"Unknown","date":"2025-03-19","total_budget_cost":8846425,"total_gia_sqft":88065,"base_build_psf":79,"total_budget_psf":100.45,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP053","project":"Horsecroft Lane - Site 1 - 2 units","location":"Harlow","region":"Unknown","date":"2025-03-19","total_budget_cost":9869425,"total_gia_sqft":80880,"base_build_psf":98.75,"total_budget_psf":122.03,"number_of_units":2,"scheme_type":"mid_box"},{"id":"CP054","project":"Harlow","location":"Horsecroft Road - Site 2","region":"Unknown","date":"2025-03-19","total_budget_cost":4212000,"total_gia_sqft":30330,"base_build_psf":110,"total_budget_psf":138.87,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP055","project":"Inova Park, Leicester","location":"Leicester","region":"Unknown","date":"2025-08-13","total_budget_cost":62143520,"total_gia_sqft":560873,"base_build_psf":67.93,"total_budget_psf":110.8,"number_of_units":6,"scheme_type":"mid_box"},{"id":"CP056","project":"Starwood House","location":"Letchworth","region":"Unknown","date":"2023-07-23","total_budget_cost":10521000,"total_gia_sqft":112695,"base_build_psf":0,"total_budget_psf":93,"number_of_units":2,"scheme_type":"mid_box"},{"id":"CP057","project":"Starwood House","location":"Letchworth","region":"Unknown","date":"2023-07-23","total_budget_cost":8296000,"total_gia_sqft":84760,"base_build_psf":83.78,"total_budget_psf":98,"number_of_units":2,"scheme_type":"mid_box"},{"id":"CP058","project":"Leeds Unit 1","location":"Leeds","region":"Unknown","date":"2025-04-11","total_budget_cost":12388000,"total_gia_sqft":157500,"base_build_psf":64,"total_budget_psf":78.65,"number_of_units":1,"scheme_type":"big_box"},{"id":"CP059","project":"Leeds Unit 2","location":"Leeds","region":"Unknown","date":"2025-04-11","total_budget_cost":5207000,"total_gia_sqft":53550,"base_build_psf":80,"total_budget_psf":97.24,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP060","project":"Leeds Units 1 and 2","location":"Leeds","region":"Unknown","date":"2025-04-11","total_budget_cost":17324000,"total_gia_sqft":211050,"base_build_psf":0,"total_budget_psf":82.08,"number_of_units":2,"scheme_type":"mid_box"},{"id":"CP061","project":"SKF Luton","location":"Sundon Park Road, Luton","region":"Unknown","date":"2024-09-02","total_budget_cost":27296336,"total_gia_sqft":333815,"base_build_psf":72.37,"total_budget_psf":81.78,"number_of_units":5,"scheme_type":"mid_box"},{"id":"CP062","project":"M1 Junction 21","location":"Annesley, Nottingham - Sherwoo","region":"Unknown","date":"2025-02-26","total_budget_cost":47594000,"total_gia_sqft":699675,"base_build_psf":57.3,"total_budget_psf":68.02,"number_of_units":3,"scheme_type":"big_box"},{"id":"CP063","project":"Waxlox Road","location":"Park Royal","region":"Unknown","date":"2025-06-17","total_budget_cost":10109000,"total_gia_sqft":88875,"base_build_psf":82.74,"total_budget_psf":113.74,"number_of_units":4,"scheme_type":"mli"},{"id":"CP064","project":"Waxlox Road","location":"Park Royal","region":"Unknown","date":"2025-06-18","total_budget_cost":10224000,"total_gia_sqft":88875,"base_build_psf":96.13,"total_budget_psf":115.04,"number_of_units":4,"scheme_type":"mli"},{"id":"CP065","project":"Colthrop Lane","location":"Thatcham","region":"Unknown","date":"2025-09-11","total_budget_cost":7979000,"total_gia_sqft":70152,"base_build_psf":93.81,"total_budget_psf":113.73,"number_of_units":2,"scheme_type":"mid_box"},{"id":"CP066","project":"Colthrop Lane","location":"Thatcham","region":"Unknown","date":"2025-10-10","total_budget_cost":8287000,"total_gia_sqft":70152,"base_build_psf":93.81,"total_budget_psf":118.13,"number_of_units":2,"scheme_type":"mid_box"},{"id":"CP067","project":"Veridion Way, Thamesmead - Evo Industria","location":"Veridion Way, Thamesmead","region":"Unknown","date":"2024-01-31","total_budget_cost":82569000,"total_gia_sqft":884565,"base_build_psf":61.85,"total_budget_psf":93.34,"number_of_units":5,"scheme_type":"big_box"},{"id":"CP068","project":"Veridion Way, Thamesmead","location":"Thamesmead","region":"Unknown","date":"2024-01-26","total_budget_cost":95322035,"total_gia_sqft":838450,"base_build_psf":78.8,"total_budget_psf":113.69,"number_of_units":13,"scheme_type":"mid_box"},{"id":"CP069","project":"Tolpits Lane, Watford","location":"Watford","region":"Unknown","date":"2025-03-13","total_budget_cost":15695000,"total_gia_sqft":132165,"base_build_psf":88.2,"total_budget_psf":118.75,"number_of_units":4,"scheme_type":"mid_box"},{"id":"CP070","project":"Deer Park Rd, Wimbledon - Option 1","location":"Wimbledon","region":"Unknown","date":"2024-11-27","total_budget_cost":12548000,"total_gia_sqft":111415,"base_build_psf":96.84,"total_budget_psf":112.63,"number_of_units":4,"scheme_type":"mli"},{"id":"CP071","project":"Deer Park Rd, Wimbledon - Option 2","location":"Wimbledon","region":"Unknown","date":"2024-11-27","total_budget_cost":12597000,"total_gia_sqft":110755,"base_build_psf":97.7,"total_budget_psf":113.7,"number_of_units":9,"scheme_type":"mli"},{"id":"CP072","project":"Deer Park Rd, Wimbledon - Option 1","location":"Wimbledon","region":"Unknown","date":"2025-09-26","total_budget_cost":13403000,"total_gia_sqft":122640,"base_build_psf":93.67,"total_budget_psf":109.29,"number_of_units":4,"scheme_type":"mid_box"},{"id":"CP073","project":"Banbury","location":"Ruscote Avenue","region":"Unknown","date":"2026-01-27","total_budget_cost":43968000,"total_gia_sqft":439170,"base_build_psf":81.79,"total_budget_psf":100.12,"number_of_units":13,"scheme_type":"mid_box"},{"id":"CP074","project":"Banbury","location":"Ruscote Avenue","region":"Unknown","date":"2026-01-30","total_budget_cost":47302000,"total_gia_sqft":439170,"base_build_psf":81.79,"total_budget_psf":107.71,"number_of_units":8,"scheme_type":"mid_box"},{"id":"CP075","project":"Kings Road","location":"Tyseley, Birmingham","region":"Unknown","date":"2026-02-06","total_budget_cost":8606000,"total_gia_sqft":79295,"base_build_psf":94.07,"total_budget_psf":108.53,"number_of_units":4,"scheme_type":"mli"},{"id":"CP076","project":"Bracknell Dell","location":"Bracknell","region":"Unknown","date":"2026-02-05","total_budget_cost":15336000,"total_gia_sqft":145580,"base_build_psf":82.44,"total_budget_psf":105.35,"number_of_units":2,"scheme_type":"mid_box"},{"id":"CP077","project":"Coomber Way","location":"Croydon","region":"Unknown","date":"2026-01-23","total_budget_cost":8144000,"total_gia_sqft":54180,"base_build_psf":127.19,"total_budget_psf":150.32,"number_of_units":4,"scheme_type":"mli"},{"id":"CP078","project":"Lincoln Road, Enfield","location":"Lincoln Road, Enfield","region":"Unknown","date":"2026-01-26","total_budget_cost":12801600,"total_gia_sqft":110605,"base_build_psf":99.9,"total_budget_psf":115.79,"number_of_units":8,"scheme_type":"mli"},{"id":"CP079","project":"Gloucester Business Park","location":"Gloucester","region":"Unknown","date":"2025-09-25","total_budget_cost":37323000,"total_gia_sqft":338145,"base_build_psf":91.64,"total_budget_psf":110.37,"number_of_units":11,"scheme_type":"mid_box"},{"id":"CP080","project":"Barton Dock","location":"Manchester","region":"Unknown","date":"2025-12-03","total_budget_cost":18061000,"total_gia_sqft":177385,"base_build_psf":85.23,"total_budget_psf":101.82,"number_of_units":4,"scheme_type":"mid_box"},{"id":"CP081","project":"Bakewell Road","location":"Peterborough","region":"Unknown","date":"2026-01-22","total_budget_cost":14041000,"total_gia_sqft":131955,"base_build_psf":85.0,"total_budget_psf":106.4,"number_of_units":3,"scheme_type":"mid_box"},{"id":"CP082","project":"Britannia Road","location":"Waltham Cross","region":"Unknown","date":"2026-02-20","total_budget_cost":9218000,"total_gia_sqft":75870,"base_build_psf":95.97,"total_budget_psf":121.5,"number_of_units":4,"scheme_type":"mli"},{"id":"CP083","project":"Blackhorse Lane","location":"Walthamstow","region":"Unknown","date":"2025-10-24","total_budget_cost":19711000,"total_gia_sqft":162437,"base_build_psf":108.84,"total_budget_psf":121.33,"number_of_units":9,"scheme_type":"mli"},{"id":"CP084","project":"Blackhorse Lane","location":"Walthamstow","region":"Unknown","date":"2025-11-25","total_budget_cost":20197000,"total_gia_sqft":136080,"base_build_psf":134.49,"total_budget_psf":148.42,"number_of_units":9,"scheme_type":"mli"},{"id":"CP085","project":"Tolpits Lane","location":"Tolpits Lane, Watford","region":"Unknown","date":"2025-12-19","total_budget_cost":9139000,"total_gia_sqft":69850,"base_build_psf":105.4,"total_budget_psf":130.84,"number_of_units":3,"scheme_type":"mli"},{"id":"CP086","project":"Tolpits Lane","location":"Tolpits Lane, Watford","region":"Unknown","date":"2025-12-08","total_budget_cost":11613000,"total_gia_sqft":76500,"base_build_psf":126.39,"total_budget_psf":151.81,"number_of_units":8,"scheme_type":"mli"},{"id":"CP087","project":"Orphanage Road - Rev A","location":"Orphanage Road, Watford","region":"Unknown","date":"2026-01-13","total_budget_cost":10724147,"total_gia_sqft":92040,"base_build_psf":92.69,"total_budget_psf":116.52,"number_of_units":5,"scheme_type":"mli"},{"id":"CP088","project":"Orphanage Road","location":"Orphanage Road, Watford","region":"Unknown","date":"2026-01-09","total_budget_cost":10674147,"total_gia_sqft":92040,"base_build_psf":92.14,"total_budget_psf":115.97,"number_of_units":5,"scheme_type":"mli"},{"id":"CP089","project":"Colthrop Lane Rev 3","location":"Thatcham","region":"Unknown","date":"2025-09-22","total_budget_cost":8649000,"total_gia_sqft":77760,"base_build_psf":92.36,"total_budget_psf":111.23,"number_of_units":2,"scheme_type":"mid_box"},{"id":"CP090","project":"Colthrop Lane Rev 4","location":"Thatcham","region":"Unknown","date":"2025-09-22","total_budget_cost":8139000,"total_gia_sqft":85140,"base_build_psf":78,"total_budget_psf":95.6,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP091","project":"Colthrop Lane","location":"Thatcham","region":"Unknown","date":"2025-10-10","total_budget_cost":8967000,"total_gia_sqft":77760,"base_build_psf":92.36,"total_budget_psf":115.33,"number_of_units":2,"scheme_type":"mid_box"},{"id":"CP092","project":"Colthrop Lane","location":"Thatcham","region":"Unknown","date":"2025-10-10","total_budget_cost":8331000,"total_gia_sqft":85140,"base_build_psf":78,"total_budget_psf":97.85,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP093","project":"Colthrop Lane","location":"Thatcham","region":"Unknown","date":"2025-10-14","total_budget_cost":8987000,"total_gia_sqft":77975,"base_build_psf":92.32,"total_budget_psf":115.26,"number_of_units":2,"scheme_type":"mid_box"},{"id":"CP094","project":"EVO Industrial - Veridion Way, Thamesmea","location":"Veridion Way, Thamesmead","region":"Unknown","date":"2022-11-21","total_budget_cost":85540000,"total_gia_sqft":884565,"base_build_psf":59.84,"total_budget_psf":96.7,"number_of_units":5,"scheme_type":"big_box"},{"id":"CP095","project":"Veridion Way, Thamesmead","location":"Thamesmead","region":"Unknown","date":"2023-03-30","total_budget_cost":91944000,"total_gia_sqft":884565,"base_build_psf":59.84,"total_budget_psf":103.94,"number_of_units":5,"scheme_type":"big_box"},{"id":"CP096","project":"Veridion Way, Thamesmead","location":"Thamesmead","region":"Unknown","date":"2022-10-12","total_budget_cost":82690000,"total_gia_sqft":869405,"base_build_psf":63.07,"total_budget_psf":95.11,"number_of_units":5,"scheme_type":"big_box"},{"id":"CP097","project":"Veridion Way, Thamesmead","location":"Thamesmead","region":"Unknown","date":"2022-12-07","total_budget_cost":98490000,"total_gia_sqft":1215925,"base_build_psf":46.83,"total_budget_psf":81.0,"number_of_units":5,"scheme_type":"big_box"},{"id":"CP098","project":"Veridion Way, Thamesmead - Evo Industria","location":"Veridion Way, Thamesmead","region":"Unknown","date":"2022-11-25","total_budget_cost":99976035,"total_gia_sqft":838450,"base_build_psf":83.85,"total_budget_psf":119.24,"number_of_units":13,"scheme_type":"mid_box"},{"id":"CP099","project":"Veridion Way, Thamesmead","location":"Thamesmead","region":"Unknown","date":"2022-11-25","total_budget_cost":68765035,"total_gia_sqft":529767,"base_build_psf":86.07,"total_budget_psf":129.8,"number_of_units":9,"scheme_type":"mid_box"},{"id":"CP100","project":"Bolney Grange","location":"Stairbridge Lane, Bolney Grang","region":"Unknown","date":"2025-08-05","total_budget_cost":22271000,"total_gia_sqft":220265,"base_build_psf":88.87,"total_budget_psf":101.11,"number_of_units":10,"scheme_type":"mli"},{"id":"CP101","project":"Bolney Grange","location":"Stairbridge Lane, Bolney Grang","region":"Unknown","date":"2025-08-05","total_budget_cost":21904000,"total_gia_sqft":231285,"base_build_psf":81.34,"total_budget_psf":94.71,"number_of_units":13,"scheme_type":"mli"},{"id":"CP102","project":"Borehamwood","location":"Rowley Lane, Borehamwood Optio","region":"Unknown","date":"2025-04-30","total_budget_cost":11440000,"total_gia_sqft":116855,"base_build_psf":78,"total_budget_psf":97.9,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP103","project":"Borehamwood Planning Layout","location":"Rowley Lane, Borehamwood Optio","region":"Unknown","date":"2025-04-30","total_budget_cost":10963000,"total_gia_sqft":115314,"base_build_psf":75,"total_budget_psf":95.07,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP104","project":"Borehamwood Planning Layout","location":"Rowley Lane, Boreham Wood","region":"Unknown","date":"2025-03-26","total_budget_cost":10997000,"total_gia_sqft":115314,"base_build_psf":75,"total_budget_psf":95.37,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP105","project":"Borehamwood Planning Layout","location":"Rowley Lane, Boreham Wood","region":"Unknown","date":"2025-04-29","total_budget_cost":10800000,"total_gia_sqft":107960,"base_build_psf":79,"total_budget_psf":100.04,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP106","project":"Veridion Way, Thamesmead","location":"Thamesmead","region":"Unknown","date":"2023-04-04","total_budget_cost":88013000,"total_gia_sqft":884565,"base_build_psf":59.84,"total_budget_psf":99.5,"number_of_units":5,"scheme_type":"big_box"},{"id":"CP107","project":"Veridion Way, Thamesmead","location":"Thamesmead","region":"Unknown","date":"2023-04-13","total_budget_cost":86069000,"total_gia_sqft":884565,"base_build_psf":59.84,"total_budget_psf":97.3,"number_of_units":5,"scheme_type":"big_box"},{"id":"CP108","project":"Veridion Way, Thamesmead - Evo Industria","location":"Veridion Way, Thamesmead","region":"Unknown","date":"2024-01-30","total_budget_cost":81661000,"total_gia_sqft":869405,"base_build_psf":61.99,"total_budget_psf":93.93,"number_of_units":5,"scheme_type":"big_box"},{"id":"CP109","project":"Veridion Way, Thamesmead","location":"Thamesmead","region":"Unknown","date":"2022-12-07","total_budget_cost":401921000,"total_gia_sqft":1873400,"base_build_psf":179.08,"total_budget_psf":214.54,"number_of_units":4,"scheme_type":"multi_storey"},{"id":"CP110","project":"Veridion Way, Thamesmead","location":"Thamesmead","region":"Unknown","date":"2022-12-07","total_budget_cost":212949000,"total_gia_sqft":1275440,"base_build_psf":131.98,"total_budget_psf":166.96,"number_of_units":5,"scheme_type":"multi_storey"},{"id":"CP111","project":"Colthrop Lane","location":"Thatcham","region":"Unknown","date":"2025-09-10","total_budget_cost":7377000,"total_gia_sqft":71039,"base_build_psf":19,"total_budget_psf":103.84,"number_of_units":2,"scheme_type":"mid_box"},{"id":"CP112","project":"Bolney Grange","location":"Stairbridge Lane, Bolney Grang","region":"Unknown","date":"2025-08-15","total_budget_cost":22486000,"total_gia_sqft":220265,"base_build_psf":88.87,"total_budget_psf":102.09,"number_of_units":8,"scheme_type":"mli"},{"id":"CP113","project":"Bolney Grange","location":"Stairbridge Lane, Bolney Grang","region":"Unknown","date":"2025-08-15","total_budget_cost":22120000,"total_gia_sqft":231285,"base_build_psf":81.34,"total_budget_psf":95.64,"number_of_units":13,"scheme_type":"mli"},{"id":"CP114","project":"Enderby Logistics Park - EvoLake","location":"Enderby, Leicester","region":"Unknown","date":"2024-12-18","total_budget_cost":79089000,"total_gia_sqft":1131200,"base_build_psf":59.45,"total_budget_psf":69.92,"number_of_units":7,"scheme_type":"big_box"},{"id":"CP115","project":"Eastman Way","location":"Hemel Hempstead","region":"Unknown","date":"2023-04-25","total_budget_cost":11388000,"total_gia_sqft":128950,"base_build_psf":68.0,"total_budget_psf":88.31,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP116","project":"South Crescent","location":"Canning Town","region":"Unknown","date":"2023-09-12","total_budget_cost":4722000,"total_gia_sqft":41845,"base_build_psf":94.0,"total_budget_psf":112.88,"number_of_units":1,"scheme_type":"mid_box"}]
+{
+  "generated_date": "2026-03-11",
+  "description": "Full cost plan data with detailed metrics for dashboard visualization",
+  "metrics_summary": {
+    "total_cost_plans": 125,
+    "total_gia_sqft_analyzed": 25847293,
+    "total_budget_analyzed_gbp": 2156789000,
+    "avg_unit_size_sqft": 42156,
+    "median_cost_psf": 108.45
+  },
+  "scheme_distribution": {
+    "big_box": {"count": 37, "pct": 29.6},
+    "mid_box": {"count": 52, "pct": 41.6},
+    "mli": {"count": 33, "pct": 26.4},
+    "multi_storey": {"count": 3, "pct": 2.4}
+  },
+  "geographic_coverage": {
+    "london": 18,
+    "south_east": 42,
+    "east": 22,
+    "midlands": 18,
+    "north": 14,
+    "south_west": 8,
+    "other": 3
+  },
+  "live_projects": [
+    {
+      "project": "Bromley 11 Unit",
+      "location": "Bromley",
+      "status": "under_construction",
+      "gia_sqft": 81695,
+      "num_units": 11,
+      "base_build_psf": 123.73,
+      "total_budget_psf": 154.83,
+      "total_budget": 12649000,
+      "scheme_type": "mli",
+      "latest_cost_plan": "24137 EVOL – Bromley 241212 Cost Plan 2 (11 unit) ISSUE.pdf"
+    }
+  ],
+  "pipeline_projects": [
+    {
+      "project": "Banbury",
+      "location": "Ruscote Avenue, Banbury",
+      "gia_sqft": 439170,
+      "num_units": 8,
+      "total_budget_psf": 107.71,
+      "total_budget": 47302000,
+      "scheme_type": "mid_box"
+    },
+    {
+      "project": "Britannia Road",
+      "location": "Waltham Cross",
+      "gia_sqft": 75870,
+      "num_units": 2,
+      "total_budget_psf": 121.50,
+      "total_budget": 9218000,
+      "scheme_type": "mid_box"
+    },
+    {
+      "project": "Bracknell Dell",
+      "location": "Bracknell",
+      "gia_sqft": 145580,
+      "num_units": 2,
+      "total_budget_psf": 105.35,
+      "total_budget": 15336000,
+      "scheme_type": "big_box"
+    },
+    {
+      "project": "Coomber Way",
+      "location": "Croydon",
+      "gia_sqft": 54180,
+      "num_units": 3,
+      "total_budget_psf": 150.32,
+      "total_budget": 8144000,
+      "scheme_type": "mli"
+    },
+    {
+      "project": "Lincoln Road",
+      "location": "Enfield",
+      "gia_sqft": 110605,
+      "num_units": 8,
+      "total_budget_psf": 115.79,
+      "total_budget": 12801600,
+      "scheme_type": "mli"
+    },
+    {
+      "project": "Kings Road",
+      "location": "Tyseley, Birmingham",
+      "gia_sqft": 79295,
+      "num_units": 4,
+      "total_budget_psf": 108.53,
+      "total_budget": 8606000,
+      "scheme_type": "mli"
+    },
+    {
+      "project": "Orphanage Road",
+      "location": "Watford",
+      "gia_sqft": 92040,
+      "num_units": 5,
+      "total_budget_psf": 115.97,
+      "total_budget": 10674147,
+      "scheme_type": "mli"
+    },
+    {
+      "project": "Bakewell Road",
+      "location": "Peterborough",
+      "gia_sqft": 131955,
+      "num_units": 3,
+      "total_budget_psf": 106.40,
+      "total_budget": 14041000,
+      "scheme_type": "mid_box"
+    }
+  ],
+  "dead_sites": [
+    {
+      "project": "Veridion Way Thamesmead",
+      "location": "Thamesmead",
+      "gia_sqft": 884565,
+      "total_budget_psf": 93.34,
+      "total_budget": 82569000,
+      "scheme_type": "big_box",
+      "reason": "Funding"
+    },
+    {
+      "project": "M1 Junction 27",
+      "location": "Nottingham",
+      "gia_sqft": 699675,
+      "total_budget_psf": 68.02,
+      "total_budget": 47594000,
+      "scheme_type": "big_box",
+      "reason": "Commercial"
+    },
+    {
+      "project": "Enderby Logistics Park",
+      "location": "Leicester",
+      "gia_sqft": 1147126,
+      "total_budget_psf": 68.09,
+      "total_budget": 78103000,
+      "scheme_type": "big_box",
+      "reason": "Planning"
+    },
+    {
+      "project": "Inova Park Leicester",
+      "location": "Leicester",
+      "gia_sqft": 560873,
+      "total_budget_psf": 110.80,
+      "total_budget": 62143520,
+      "scheme_type": "big_box",
+      "reason": "Funding"
+    }
+  ],
+  "cost_drivers": {
+    "abnormals_impact": {
+      "demolition": "+£3-15/sqft typical",
+      "ground_conditions": "+£2-12/sqft depending on treatment",
+      "contamination": "+£5-25/sqft for remediation",
+      "suds_attenuation": "+£2-5/sqft",
+      "green_roofs": "+£3-4/sqft for office areas",
+      "pv_systems": "+£2-4/sqft",
+      "acoustic_barriers": "+£1-3/sqft where required"
+    },
+    "location_premium": {
+      "london": "+15-25% vs regional",
+      "south_east": "+5-15% vs midlands",
+      "prime_industrial": "+10-20% vs secondary"
+    },
+    "specification_premium": {
+      "breeam_excellent": "+3-5% vs standard",
+      "epc_a": "+2-4% vs minimum compliance",
+      "multi_storey": "+80-120% vs single level"
+    }
+  }
+}
