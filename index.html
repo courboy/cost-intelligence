@@ -7,476 +7,103 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #0f172a;
-            color: #e2e8f0;
-            min-height: 100vh;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border-bottom: 1px solid #334155;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+        .header { background: #1e293b; border-bottom: 1px solid #334155; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 1.25rem; font-weight: 600; color: #f8fafc; }
         .logo span { color: #3b82f6; }
         .header-meta { font-size: 0.8rem; color: #64748b; }
-        
-        .tabs {
-            display: flex;
-            gap: 0;
-            padding: 0 40px;
-            background: #1e293b;
-            border-bottom: 1px solid #334155;
-        }
-        .tab {
-            padding: 14px 24px;
-            cursor: pointer;
-            color: #94a3b8;
-            font-size: 0.9rem;
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s;
-        }
+        .tabs { display: flex; padding: 0 40px; background: #1e293b; border-bottom: 1px solid #334155; }
+        .tab { padding: 14px 24px; cursor: pointer; color: #94a3b8; font-size: 0.9rem; border-bottom: 2px solid transparent; }
         .tab:hover { color: #e2e8f0; }
         .tab.active { color: #3b82f6; border-bottom-color: #3b82f6; }
-        
         .container { max-width: 1400px; margin: 0 auto; padding: 30px 40px; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        
-        .grid { display: grid; grid-template-columns: 400px 1fr; gap: 30px; }
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
-        @media (max-width: 1000px) { .grid, .grid-2, .grid-3 { grid-template-columns: 1fr; } }
-        
-        .panel {
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 8px;
-        }
-        .panel-header {
-            padding: 16px 20px;
-            border-bottom: 1px solid #334155;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #f1f5f9;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .panel-header .badge {
-            background: #3b82f6;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.7rem;
-            font-weight: 500;
-        }
+        @media (max-width: 1000px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+        .panel { background: #1e293b; border: 1px solid #334155; border-radius: 8px; }
+        .panel-header { padding: 16px 20px; border-bottom: 1px solid #334155; font-weight: 600; font-size: 0.9rem; color: #f1f5f9; text-transform: uppercase; letter-spacing: 0.05em; }
         .panel-body { padding: 20px; }
-        
-        .form-group { margin-bottom: 18px; }
-        .form-group label { 
-            display: block; 
-            font-size: 0.8rem; 
-            color: #94a3b8; 
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-        }
-        select, input[type="number"], input[type="text"] {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #475569;
-            border-radius: 6px;
-            background: #0f172a;
-            color: #f1f5f9;
-            font-size: 0.95rem;
-        }
-        select:focus, input:focus { outline: none; border-color: #3b82f6; }
-        
-        .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 10px;
-            background: #0f172a;
-            border: 1px solid #334155;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            cursor: pointer;
-        }
-        .checkbox-item:hover { border-color: #475569; }
-        .checkbox-item input { width: 16px; height: 16px; cursor: pointer; }
-        
-        .upload-zone {
-            border: 2px dashed #475569;
-            border-radius: 8px;
-            padding: 30px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-bottom: 20px;
-        }
-        .upload-zone:hover { border-color: #3b82f6; background: rgba(59, 130, 246, 0.05); }
-        .upload-zone.active { border-color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
-        .upload-zone input { display: none; }
-        .upload-icon { font-size: 2rem; margin-bottom: 10px; color: #64748b; }
-        .upload-text { color: #94a3b8; font-size: 0.9rem; }
-        .upload-text strong { color: #3b82f6; }
-        .upload-hint { color: #64748b; font-size: 0.75rem; margin-top: 8px; }
-        
-        .result-panel { background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%); }
-        
-        .result-main {
-            display: flex;
-            align-items: baseline;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        .result-value { font-size: 3rem; font-weight: 700; color: #f8fafc; }
-        .result-psf { font-size: 1.25rem; color: #94a3b8; }
-        
-        .confidence-bar {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-            padding: 12px 16px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 6px;
-        }
-        .confidence-label { font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; }
-        .confidence-meter {
-            flex: 1;
-            height: 8px;
-            background: #334155;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .confidence-fill {
-            height: 100%;
-            border-radius: 4px;
-            transition: width 0.3s;
-        }
-        .confidence-fill.high { background: #22c55e; }
-        .confidence-fill.medium { background: #eab308; }
-        .confidence-fill.low { background: #ef4444; }
-        .confidence-value { 
-            font-size: 0.9rem; 
-            font-weight: 600;
-            min-width: 45px;
-            text-align: right;
-        }
-        
-        .breakdown-table { width: 100%; }
-        .breakdown-table tr { border-bottom: 1px solid #334155; }
-        .breakdown-table tr:last-child { border: none; }
-        .breakdown-table td { padding: 10px 0; font-size: 0.9rem; }
-        .breakdown-table td:first-child { color: #94a3b8; }
-        .breakdown-table td:last-child { text-align: right; font-weight: 500; }
-        
-        .range-bar {
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid #334155;
-        }
-        .range-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            color: #64748b;
-            margin-bottom: 8px;
-        }
-        .range-track {
-            height: 6px;
-            background: #334155;
-            border-radius: 3px;
-            position: relative;
-        }
-        .range-fill {
-            position: absolute;
-            height: 100%;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            border-radius: 3px;
-        }
-        .range-marker {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: #f8fafc;
-            border-radius: 50%;
-            top: -3px;
-            transform: translateX(-50%);
-        }
-        
-        /* Insight Cards */
-        .insight-card {
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 8px;
-            padding: 20px;
-        }
-        .insight-card h3 {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 12px;
-        }
-        .insight-value {
-            font-size: 2.25rem;
-            font-weight: 700;
-            color: #f8fafc;
-            margin-bottom: 4px;
-        }
-        .insight-label {
-            font-size: 0.8rem;
-            color: #64748b;
-        }
-        .insight-sub {
-            font-size: 0.75rem;
-            color: #475569;
-            margin-top: 4px;
-        }
-        .insight-trend {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 0.8rem;
-            padding: 3px 8px;
-            border-radius: 4px;
-            margin-top: 10px;
-        }
-        .insight-trend.up { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
-        .insight-trend.down { background: rgba(34, 197, 94, 0.2); color: #86efac; }
-        .insight-trend.neutral { background: rgba(148, 163, 184, 0.2); color: #94a3b8; }
-        
-        .cost-type-badge {
-            display: inline-block;
-            background: #0ea5e9;
-            color: white;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-size: 0.65rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-        
-        /* Data Table */
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-        }
-        .data-table th {
-            text-align: left;
-            padding: 12px 15px;
-            background: #0f172a;
-            border-bottom: 2px solid #334155;
-            color: #94a3b8;
-            font-weight: 500;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.03em;
-            position: sticky;
-            top: 0;
-        }
+        .insight-card { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 20px; }
+        .insight-card h3 { font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
+        .insight-value { font-size: 2.25rem; font-weight: 700; color: #f8fafc; margin-bottom: 4px; }
+        .insight-label { font-size: 0.8rem; color: #64748b; }
+        .insight-sub { font-size: 0.75rem; color: #475569; margin-top: 4px; }
+        .cost-badge { display: inline-block; background: #0ea5e9; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; margin-left: 8px; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .data-table th { text-align: left; padding: 12px 15px; background: #0f172a; border-bottom: 2px solid #334155; color: #94a3b8; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; }
         .data-table th.num { text-align: right; }
-        .data-table td {
-            padding: 10px 15px;
-            border-bottom: 1px solid #1e293b;
-        }
+        .data-table td { padding: 10px 15px; border-bottom: 1px solid #1e293b; }
         .data-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
         .data-table tr:hover td { background: rgba(59, 130, 246, 0.05); }
-        .data-table .sortable { cursor: pointer; }
-        .data-table .sortable:hover { color: #3b82f6; }
-        
-        .table-scroll { max-height: 600px; overflow-y: auto; }
-        
-        .bar-inline {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .bar-track {
-            flex: 1;
-            height: 8px;
-            background: #334155;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
-            border-radius: 4px;
-        }
-        
-        .chart-container {
-            position: relative;
-            height: 300px;
-            margin-top: 20px;
-        }
-        .chart-container.small { height: 200px; }
-        
-        .abnormal-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .abnormal-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 15px;
-            background: #0f172a;
-            border-radius: 6px;
-        }
+        .chart-container { position: relative; height: 250px; margin-top: 15px; }
+        .abnormal-list { display: flex; flex-direction: column; gap: 10px; }
+        .abnormal-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background: #0f172a; border-radius: 6px; }
         .abnormal-name { color: #e2e8f0; }
         .abnormal-range { color: #3b82f6; font-weight: 600; }
-        
-        .bcis-compare {
-            display: flex;
-            gap: 30px;
-            padding: 20px;
-            background: #0f172a;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-        .bcis-col { flex: 1; }
-        .bcis-col h4 { 
-            font-size: 0.8rem; 
-            color: #94a3b8; 
-            margin-bottom: 15px; 
-            text-transform: uppercase;
-        }
-        .bcis-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #1e293b;
-        }
+        .bcis-compare { display: flex; gap: 30px; padding: 20px; background: #0f172a; border-radius: 8px; margin-top: 20px; flex-wrap: wrap; }
+        .bcis-col { flex: 1; min-width: 200px; }
+        .bcis-col h4 { font-size: 0.8rem; color: #94a3b8; margin-bottom: 15px; text-transform: uppercase; }
+        .bcis-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #1e293b; }
         .bcis-row:last-child { border: none; }
         .bcis-label { color: #94a3b8; }
         .bcis-value { font-weight: 600; }
         .bcis-value.evo { color: #3b82f6; }
         .bcis-value.bcis { color: #a78bfa; }
-        
-        .add-form {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr auto;
-            gap: 15px;
-            align-items: end;
-            padding: 20px;
-            background: #0f172a;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        .add-form .form-group { margin: 0; }
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-        .btn-primary { background: #3b82f6; color: white; }
-        .btn-primary:hover { background: #2563eb; }
-        .btn-secondary { background: #475569; color: white; }
-        .btn-secondary:hover { background: #64748b; }
-        
-        .filter-bar {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            align-items: center;
-        }
-        .filter-bar select { width: auto; min-width: 150px; }
-        .filter-bar input[type="text"] { width: 250px; }
-        
-        .stats-banner {
-            display: flex;
-            gap: 30px;
-            padding: 15px 20px;
-            background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%);
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        .stats-item {
-            display: flex;
-            flex-direction: column;
-        }
+        .table-scroll { max-height: 500px; overflow-y: auto; }
+        .filter-bar { display: flex; gap: 15px; margin-bottom: 20px; align-items: center; flex-wrap: wrap; }
+        .filter-bar select, .filter-bar input { padding: 8px 12px; border: 1px solid #475569; border-radius: 6px; background: #0f172a; color: #f1f5f9; font-size: 0.9rem; }
+        .filter-bar select { min-width: 140px; }
+        .filter-bar input { width: 200px; }
+        .stats-banner { display: flex; gap: 30px; padding: 15px 20px; background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%); border-radius: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+        .stats-item { display: flex; flex-direction: column; }
         .stats-value { font-size: 1.5rem; font-weight: 700; color: #f8fafc; }
         .stats-label { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; }
-        
-        #analysisResult { display: none; margin-top: 20px; padding: 15px; background: #0f172a; border-radius: 6px; }
-        #analysisResult.visible { display: block; }
-        
-        .success-msg {
-            padding: 10px 15px;
-            background: rgba(34, 197, 94, 0.2);
-            border: 1px solid #22c55e;
-            border-radius: 6px;
-            color: #86efac;
-            margin-bottom: 15px;
-            display: none;
-        }
-        .success-msg.visible { display: block; }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="logo">Evo<span>Lake</span> Cost Intelligence</div>
-        <div class="header-meta" id="headerMeta">116 cost plans | Oct 2022 - Feb 2026 | £3.26B total value</div>
+        <div class="header-meta">116 cost plans | Oct 2022 - Feb 2026 | £3.26B total value</div>
     </div>
     
     <div class="tabs">
         <div class="tab active" onclick="showTab('insights')">Key Insights</div>
-        <div class="tab" onclick="showTab('estimator')">Cost Estimator</div>
-        <div class="tab" onclick="showTab('trends')">Trends & Inflation</div>
+        <div class="tab" onclick="showTab('trends')">Trends</div>
         <div class="tab" onclick="showTab('data')">Raw Data</div>
     </div>
     
-    <!-- TAB 1: KEY INSIGHTS (DEFAULT) -->
+    <!-- TAB 1: KEY INSIGHTS -->
     <div id="tab-insights" class="tab-content active">
         <div class="container">
             <p style="color: #94a3b8; margin-bottom: 25px; font-size: 0.9rem;">
-                All costs shown are <strong style="color: #0ea5e9;">Base Construction Costs</strong> (shell build + prelims + OHP), 
-                excluding abnormals, contingency, and professional fees unless stated otherwise.
+                All costs shown are <strong style="color: #0ea5e9;">Base Construction Costs</strong> (shell build + prelims + OHP), excluding abnormals, contingency, and professional fees.
             </p>
             
             <div class="grid-4" style="margin-bottom: 30px;">
                 <div class="insight-card">
-                    <h3>Big Box<span class="cost-type-badge">Base</span></h3>
-                    <div class="insight-value" id="bigBoxAvg">£61</div>
+                    <h3>Big Box<span class="cost-badge">Base</span></h3>
+                    <div class="insight-value">£59</div>
                     <div class="insight-label">per sq ft (shell)</div>
-                    <div class="insight-sub">200k+ sq ft/unit | 5 plans</div>
+                    <div class="insight-sub">200k+ sq ft/unit | 14 plans</div>
                 </div>
                 <div class="insight-card">
-                    <h3>Mid Box<span class="cost-type-badge">Base</span></h3>
-                    <div class="insight-value" id="midBoxAvg">£85</div>
+                    <h3>Mid Box<span class="cost-badge">Base</span></h3>
+                    <div class="insight-value">£83</div>
                     <div class="insight-label">per sq ft (shell)</div>
-                    <div class="insight-sub">30-200k sq ft/unit | 13 plans</div>
+                    <div class="insight-sub">30-200k sq ft/unit | 59 plans</div>
                 </div>
                 <div class="insight-card">
-                    <h3>MLI<span class="cost-type-badge">Base</span></h3>
-                    <div class="insight-value" id="mliAvg">£103</div>
+                    <h3>MLI<span class="cost-badge">Base</span></h3>
+                    <div class="insight-value">£107</div>
                     <div class="insight-label">per sq ft (shell)</div>
-                    <div class="insight-sub">&lt;30k sq ft/unit | 13 plans</div>
+                    <div class="insight-sub">&lt;30k sq ft/unit | 41 plans</div>
                 </div>
                 <div class="insight-card">
-                    <h3>Multi-Storey<span class="cost-type-badge">Base</span></h3>
-                    <div class="insight-value" id="msAvg">£122</div>
+                    <h3>Multi-Storey<span class="cost-badge">Base</span></h3>
+                    <div class="insight-value">£156</div>
                     <div class="insight-label">per sq ft (shell)</div>
                     <div class="insight-sub">Stacked industrial | 2 plans</div>
                 </div>
@@ -484,50 +111,35 @@
             
             <div class="grid-2">
                 <div class="panel">
-                    <div class="panel-header">
-                        Base Construction Cost by Scheme Type
-                        <span class="badge">KAM Data</span>
-                    </div>
+                    <div class="panel-header">Base Cost by Scheme Type</div>
                     <div class="panel-body">
                         <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Type</th>
-                                    <th class="num">Plans</th>
-                                    <th class="num">Base £/sq ft</th>
-                                    <th class="num">All-In £/sq ft</th>
-                                </tr>
-                            </thead>
-                            <tbody id="schemeTypeTable">
+                            <thead><tr><th>Type</th><th class="num">Plans</th><th class="num">Base £/sqft</th><th class="num">All-In £/sqft</th></tr></thead>
+                            <tbody>
+                                <tr><td>Big Box (&gt;150k)</td><td class="num">14</td><td class="num">£59</td><td class="num">£85</td></tr>
+                                <tr><td>Mid Box (30-150k)</td><td class="num">59</td><td class="num">£83</td><td class="num">£105</td></tr>
+                                <tr><td>MLI (&lt;30k)</td><td class="num">41</td><td class="num">£107</td><td class="num">£130</td></tr>
+                                <tr><td>Multi-Storey</td><td class="num">2</td><td class="num">£156</td><td class="num">£191</td></tr>
                             </tbody>
                         </table>
-                        <div class="chart-container small">
-                            <canvas id="schemeTypeChart"></canvas>
-                        </div>
+                        <div class="chart-container"><canvas id="schemeTypeChart"></canvas></div>
                     </div>
                 </div>
                 
                 <div class="panel">
-                    <div class="panel-header">
-                        Base Construction Cost by Region
-                        <span class="badge">KAM Data</span>
-                    </div>
+                    <div class="panel-header">Base Cost by Region</div>
                     <div class="panel-body">
                         <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Region</th>
-                                    <th class="num">Plans</th>
-                                    <th class="num">Base £/sq ft</th>
-                                    <th class="num">vs Midlands</th>
-                                </tr>
-                            </thead>
-                            <tbody id="regionTable">
+                            <thead><tr><th>Region</th><th class="num">Plans</th><th class="num">Base £/sqft</th><th class="num">vs Midlands</th></tr></thead>
+                            <tbody>
+                                <tr><td>London</td><td class="num">35</td><td class="num">£105</td><td class="num">+30%</td></tr>
+                                <tr><td>South East</td><td class="num">58</td><td class="num">£86</td><td class="num">+15%</td></tr>
+                                <tr><td>West Midlands</td><td class="num">3</td><td class="num">£82</td><td class="num">+5%</td></tr>
+                                <tr><td>North West</td><td class="num">4</td><td class="num">£80</td><td class="num">-5%</td></tr>
+                                <tr><td>East Midlands</td><td class="num">8</td><td class="num">£62</td><td class="num">Base</td></tr>
                             </tbody>
                         </table>
-                        <div class="chart-container small">
-                            <canvas id="regionChart"></canvas>
-                        </div>
+                        <div class="chart-container"><canvas id="regionChart"></canvas></div>
                     </div>
                 </div>
             </div>
@@ -535,157 +147,220 @@
             <div class="panel" style="margin-top: 30px;">
                 <div class="panel-header">Evo Lake vs BCIS Benchmarks</div>
                 <div class="panel-body">
-                    <p style="color: #94a3b8; margin-bottom: 15px; font-size: 0.85rem;">
-                        BCIS data from Q1 2026. Our data reflects actual KAM cost plans; BCIS reflects industry-wide averages.
-                    </p>
+                    <p style="color: #94a3b8; margin-bottom: 15px; font-size: 0.85rem;">BCIS data from Q1 2026. Our data reflects actual KAM cost plans.</p>
                     <div class="bcis-compare">
                         <div class="bcis-col">
                             <h4>Distribution / Big Box</h4>
-                            <div class="bcis-row">
-                                <span class="bcis-label">Evo Lake (KAM)</span>
-                                <span class="bcis-value evo">£61/sq ft base</span>
-                            </div>
-                            <div class="bcis-row">
-                                <span class="bcis-label">BCIS Average</span>
-                                <span class="bcis-value bcis">£51/sq ft</span>
-                            </div>
-                            <div class="bcis-row">
-                                <span class="bcis-label">Variance</span>
-                                <span class="bcis-value">+20%</span>
-                            </div>
+                            <div class="bcis-row"><span class="bcis-label">Evo Lake</span><span class="bcis-value evo">£59/sqft</span></div>
+                            <div class="bcis-row"><span class="bcis-label">BCIS Average</span><span class="bcis-value bcis">£51/sqft</span></div>
+                            <div class="bcis-row"><span class="bcis-label">Variance</span><span class="bcis-value">+16%</span></div>
                         </div>
                         <div class="bcis-col">
                             <h4>General Industrial</h4>
-                            <div class="bcis-row">
-                                <span class="bcis-label">Evo Lake (KAM)</span>
-                                <span class="bcis-value evo">£85/sq ft base</span>
-                            </div>
-                            <div class="bcis-row">
-                                <span class="bcis-label">BCIS Average</span>
-                                <span class="bcis-value bcis">£105/sq ft</span>
-                            </div>
-                            <div class="bcis-row">
-                                <span class="bcis-label">Variance</span>
-                                <span class="bcis-value" style="color: #22c55e;">-19%</span>
-                            </div>
+                            <div class="bcis-row"><span class="bcis-label">Evo Lake</span><span class="bcis-value evo">£83/sqft</span></div>
+                            <div class="bcis-row"><span class="bcis-label">BCIS Average</span><span class="bcis-value bcis">£105/sqft</span></div>
+                            <div class="bcis-row"><span class="bcis-label">Variance</span><span class="bcis-value" style="color:#22c55e">-21%</span></div>
                         </div>
                         <div class="bcis-col">
                             <h4>MLI / Small Units</h4>
-                            <div class="bcis-row">
-                                <span class="bcis-label">Evo Lake (KAM)</span>
-                                <span class="bcis-value evo">£103/sq ft base</span>
-                            </div>
-                            <div class="bcis-row">
-                                <span class="bcis-label">BCIS Average</span>
-                                <span class="bcis-value bcis">£105/sq ft</span>
-                            </div>
-                            <div class="bcis-row">
-                                <span class="bcis-label">Variance</span>
-                                <span class="bcis-value" style="color: #22c55e;">-2%</span>
-                            </div>
+                            <div class="bcis-row"><span class="bcis-label">Evo Lake</span><span class="bcis-value evo">£107/sqft</span></div>
+                            <div class="bcis-row"><span class="bcis-label">BCIS Average</span><span class="bcis-value bcis">£105/sqft</span></div>
+                            <div class="bcis-row"><span class="bcis-label">Variance</span><span class="bcis-value">+2%</span></div>
                         </div>
                     </div>
-                    <p style="color: #64748b; font-size: 0.75rem; margin-top: 15px;">
-                        Note: BCIS distribution figure (£51/sq ft) based on 10,000sqm+ units. Evo Lake big box average skewed higher due to London-heavy sample (Thamesmead). 
-                        BCIS general industrial = £1,130/sqm (£105/sq ft) from CostModelling/BCIS Q1 2026.
-                    </p>
                 </div>
             </div>
             
             <div class="panel" style="margin-top: 30px;">
-                <div class="panel-header">Typical Abnormal Cost Ranges</div>
+                <div class="panel-header">Typical Abnormal Costs</div>
                 <div class="panel-body">
-                    <p style="color: #94a3b8; margin-bottom: 20px; font-size: 0.85rem;">
-                        Add these to base construction costs. Derived from KAM cost plan abnormal sections.
-                    </p>
                     <div class="grid-3">
                         <div>
-                            <h4 style="color: #f1f5f9; font-size: 0.85rem; margin-bottom: 15px;">Standard (Typically Included)</h4>
+                            <h4 style="color: #f1f5f9; font-size: 0.85rem; margin-bottom: 15px;">Standard</h4>
                             <div class="abnormal-list">
-                                <div class="abnormal-item">
-                                    <span class="abnormal-name">PV Installation (EPC A+)</span>
-                                    <span class="abnormal-range">£2-4/sq ft</span>
-                                </div>
-                                <div class="abnormal-item">
-                                    <span class="abnormal-name">Attenuation / SUDS</span>
-                                    <span class="abnormal-range">£2-4/sq ft</span>
-                                </div>
-                                <div class="abnormal-item">
-                                    <span class="abnormal-name">Landscaping (10% BNG)</span>
-                                    <span class="abnormal-range">£1-3/sq ft</span>
-                                </div>
-                                <div class="abnormal-item">
-                                    <span class="abnormal-name">EV Charging (20% active)</span>
-                                    <span class="abnormal-range">£0.5-1/sq ft</span>
-                                </div>
+                                <div class="abnormal-item"><span class="abnormal-name">PV (EPC A+)</span><span class="abnormal-range">£2-4/sqft</span></div>
+                                <div class="abnormal-item"><span class="abnormal-name">SUDS/Attenuation</span><span class="abnormal-range">£2-4/sqft</span></div>
+                                <div class="abnormal-item"><span class="abnormal-name">EV Charging</span><span class="abnormal-range">£0.5-1/sqft</span></div>
                             </div>
                         </div>
                         <div>
-                            <h4 style="color: #f1f5f9; font-size: 0.85rem; margin-bottom: 15px;">Site-Specific Abnormals</h4>
+                            <h4 style="color: #f1f5f9; font-size: 0.85rem; margin-bottom: 15px;">Site-Specific</h4>
                             <div class="abnormal-list">
-                                <div class="abnormal-item">
-                                    <span class="abnormal-name">Demolition</span>
-                                    <span class="abnormal-range">£4-8/sq ft</span>
-                                </div>
-                                <div class="abnormal-item">
-                                    <span class="abnormal-name">Ground Improvement (CMCs)</span>
-                                    <span class="abnormal-range">£3-6/sq ft</span>
-                                </div>
-                                <div class="abnormal-item">
-                                    <span class="abnormal-name">Contamination Remediation</span>
-                                    <span class="abnormal-range">£5-15/sq ft</span>
-                                </div>
-                                <div class="abnormal-item">
-                                    <span class="abnormal-name">Flood Mitigation</span>
-                                    <span class="abnormal-range">£4-8/sq ft</span>
-                                </div>
+                                <div class="abnormal-item"><span class="abnormal-name">Demolition</span><span class="abnormal-range">£4-8/sqft</span></div>
+                                <div class="abnormal-item"><span class="abnormal-name">Ground Works</span><span class="abnormal-range">£3-6/sqft</span></div>
+                                <div class="abnormal-item"><span class="abnormal-name">Contamination</span><span class="abnormal-range">£5-15/sqft</span></div>
                             </div>
                         </div>
                         <div>
-                            <h4 style="color: #f1f5f9; font-size: 0.85rem; margin-bottom: 15px;">Infrastructure (Lump Sum)</h4>
+                            <h4 style="color: #f1f5f9; font-size: 0.85rem; margin-bottom: 15px;">Infrastructure</h4>
                             <div class="abnormal-list">
-                                <div class="abnormal-item">
-                                    <span class="abnormal-name">Substation (1nr)</span>
-                                    <span class="abnormal-range">£150-250k</span>
-                                </div>
-                                <div class="abnormal-item">
-                                    <span class="abnormal-name">HV Connection</span>
-                                    <span class="abnormal-range">£50-150k</span>
-                                </div>
-                                <div class="abnormal-item">
-                                    <span class="abnormal-name">Sewer Diversion</span>
-                                    <span class="abnormal-range">£200-500k</span>
-                                </div>
-                                <div class="abnormal-item">
-                                    <span class="abnormal-name">S278 Highway Works</span>
-                                    <span class="abnormal-range">£100k-1M+</span>
-                                </div>
+                                <div class="abnormal-item"><span class="abnormal-name">Substation</span><span class="abnormal-range">£150-250k</span></div>
+                                <div class="abnormal-item"><span class="abnormal-name">HV Connection</span><span class="abnormal-range">£50-150k</span></div>
+                                <div class="abnormal-item"><span class="abnormal-name">S278 Works</span><span class="abnormal-range">£100k-1M+</span></div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="panel" style="margin-top: 30px;">
-                <div class="panel-header">Unit Size Impact on Base Cost</div>
-                <div class="panel-body">
-                    <p style="color: #94a3b8; margin-bottom: 20px; font-size: 0.85rem;">
-                        Larger units = lower £/sq ft due to economies of scale. Each 10,000 sq ft increase reduces base cost by ~£1.50/sq ft.
-                    </p>
-                    <div class="chart-container">
-                        <canvas id="unitSizeChart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- TAB 2: ESTIMATOR -->
-    <div id="tab-estimator" class="tab-content">
+    <!-- TAB 2: TRENDS -->
+    <div id="tab-trends" class="tab-content">
         <div class="container">
-            <div class="grid">
-                <!-- Input Panel -->
-                <div class="panel">
-                    <div class="panel-header">Scheme Parameters</div>
-                    <div class="panel-body">
-                        
+            <div class="grid-2" style="margin-bottom: 30px;">
+                <div class="insight-card">
+                    <h3>Cost Inflation (3 Years)</h3>
+                    <div class="insight-value">+20%</div>
+                    <div class="insight-label">Q4 2022 to Q1 2026</div>
+                    <div class="insight-sub">+6% annualised</div>
+                </div>
+                <div class="insight-card">
+                    <h3>Last 12 Months</h3>
+                    <div class="insight-value">+5%</div>
+                    <div class="insight-label">Q1 2025 to Q1 2026</div>
+                    <div class="insight-sub">Moderating (BCIS: +5% Q2 2025)</div>
+                </div>
+            </div>
+            
+            <div class="panel">
+                <div class="panel-header">Base Cost Over Time</div>
+                <div class="panel-body">
+                    <div class="chart-container" style="height: 300px;"><canvas id="inflationChart"></canvas></div>
+                </div>
+            </div>
+            
+            <div class="panel" style="margin-top: 30px;">
+                <div class="panel-header">Unit Size Impact</div>
+                <div class="panel-body">
+                    <p style="color: #94a3b8; margin-bottom: 15px; font-size: 0.85rem;">Larger units = lower £/sqft due to economies of scale.</p>
+                    <div class="chart-container" style="height: 300px;"><canvas id="unitSizeChart"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- TAB 3: RAW DATA -->
+    <div id="tab-data" class="tab-content">
+        <div class="container">
+            <div class="stats-banner">
+                <div class="stats-item"><div class="stats-value">116</div><div class="stats-label">Cost Plans</div></div>
+                <div class="stats-item"><div class="stats-value">23M</div><div class="stats-label">sq ft GFA</div></div>
+                <div class="stats-item"><div class="stats-value">£3.26B</div><div class="stats-label">Total Value</div></div>
+                <div class="stats-item"><div class="stats-value">Oct 22 - Feb 26</div><div class="stats-label">Date Range</div></div>
+            </div>
+            
+            <div class="panel">
+                <div class="panel-header">All Cost Plans</div>
+                <div class="panel-body">
+                    <div class="filter-bar">
+                        <select id="filterType" onchange="filterTable()">
+                            <option value="">All Types</option>
+                            <option value="big_box">Big Box</option>
+                            <option value="mid_box">Mid Box</option>
+                            <option value="mli">MLI</option>
+                            <option value="multi_storey">Multi-Storey</option>
+                        </select>
+                        <select id="filterRegion" onchange="filterTable()">
+                            <option value="">All Regions</option>
+                            <option value="London">London</option>
+                            <option value="South East">South East</option>
+                            <option value="East Midlands">East Midlands</option>
+                            <option value="North West">North West</option>
+                        </select>
+                        <input type="text" id="filterSearch" placeholder="Search projects..." oninput="filterTable()">
+                    </div>
+                    <div class="table-scroll">
+                        <table class="data-table" id="rawDataTable">
+                            <thead><tr><th>Date</th><th>Project</th><th>Region</th><th>Type</th><th class="num">GIA</th><th class="num">Units</th><th class="num">Base £/sqft</th><th class="num">Total £/sqft</th><th class="num">Budget</th></tr></thead>
+                            <tbody id="rawDataBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const costPlans = [{"id":"CP001","project":"Veridion Way, Thamesmead","location":"Thamesmead","region":"South East","date":"2022-10-12","total_budget_cost":82690000,"total_gia_sqft":869405,"base_build_psf":63.07,"total_budget_psf":95.11,"number_of_units":5,"scheme_type":"big_box"},{"id":"CP002","project":"DHL Building, Salford","location":"Salford","region":"North West","date":"2022-10-24","total_budget_cost":12151000,"total_gia_sqft":114385,"base_build_psf":86.37,"total_budget_psf":106.23,"number_of_units":2,"scheme_type":"mid_box"},{"id":"CP003","project":"Veridion Way, Thamesmead","location":"Thamesmead","region":"South East","date":"2022-11-21","total_budget_cost":85540000,"total_gia_sqft":884565,"base_build_psf":59.84,"total_budget_psf":96.7,"number_of_units":5,"scheme_type":"big_box"},{"id":"CP004","project":"Veridion Way, Thamesmead","location":"Thamesmead","region":"South East","date":"2022-12-07","total_budget_cost":401921000,"total_gia_sqft":1873400,"base_build_psf":179.08,"total_budget_psf":214.54,"number_of_units":4,"scheme_type":"multi_storey"},{"id":"CP005","project":"Veridion Way, Thamesmead","location":"Thamesmead","region":"South East","date":"2022-12-07","total_budget_cost":212949000,"total_gia_sqft":1275440,"base_build_psf":131.98,"total_budget_psf":166.96,"number_of_units":5,"scheme_type":"multi_storey"},{"id":"CP006","project":"St Andrews Way, Bromley by Bow","location":"Bromley by Bow","region":"London","date":"2023-01-04","total_budget_cost":24976000,"total_gia_sqft":207655,"base_build_psf":87.91,"total_budget_psf":120.28,"number_of_units":7,"scheme_type":"mid_box"},{"id":"CP007","project":"Chesford Grange Warrington","location":"Warrington","region":"North West","date":"2023-02-17","total_budget_cost":12052000,"total_gia_sqft":147315,"base_build_psf":66.9,"total_budget_psf":81.81,"number_of_units":2,"scheme_type":"mid_box"},{"id":"CP008","project":"Austin Drive Coventry","location":"Coventry","region":"West Midlands","date":"2023-02-24","total_budget_cost":14062000,"total_gia_sqft":149805,"base_build_psf":70.58,"total_budget_psf":93.87,"number_of_units":8,"scheme_type":"mli"},{"id":"CP009","project":"Dell, Bracknell","location":"Bracknell","region":"South East","date":"2023-03-28","total_budget_cost":15737000,"total_gia_sqft":150950,"base_build_psf":81.68,"total_budget_psf":104.25,"number_of_units":2,"scheme_type":"mid_box"},{"id":"CP010","project":"Stirling Way","location":"Borehamwood","region":"South East","date":"2023-04-11","total_budget_cost":7129000,"total_gia_sqft":50630,"base_build_psf":122.56,"total_budget_psf":140.82,"number_of_units":5,"scheme_type":"mli"},{"id":"CP011","project":"29 Mollison Avenue","location":"Enfield","region":"South East","date":"2023-04-14","total_budget_cost":9883000,"total_gia_sqft":70380,"base_build_psf":99.16,"total_budget_psf":140.42,"number_of_units":8,"scheme_type":"mli"},{"id":"CP012","project":"Eastman Way","location":"Hemel Hempstead","region":"South East","date":"2023-04-25","total_budget_cost":11388000,"total_gia_sqft":128950,"base_build_psf":68,"total_budget_psf":88.31,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP013","project":"South Crescent","location":"Canning Town","region":"London","date":"2023-09-12","total_budget_cost":4722000,"total_gia_sqft":41845,"base_build_psf":94,"total_budget_psf":112.88,"number_of_units":1,"scheme_type":"mid_box"},{"id":"CP014","project":"Croydon","location":"Horatius Way","region":"London","date":"2023-10-25","total_budget_cost":17816500,"total_gia_sqft":120940,"base_build_psf":115.57,"total_budget_psf":147.32,"number_of_units":9,"scheme_type":"mli"},{"id":"CP015","project":"Park Royal","location":"Western Ave","region":"London","date":"2024-06-13","total_budget_cost":13949000,"total_gia_sqft":111640,"base_build_psf":110.22,"total_budget_psf":124.95,"number_of_units":6,"scheme_type":"mli"},{"id":"CP016","project":"Bromley","location":"Bromley","region":"London","date":"2024-06-19","total_budget_cost":12033000,"total_gia_sqft":81430,"base_build_psf":121.87,"total_budget_psf":147.78,"number_of_units":9,"scheme_type":"mli"},{"id":"CP017","project":"Collet Way","location":"Southall","region":"London","date":"2024-08-02","total_budget_cost":5297000,"total_gia_sqft":31435,"base_build_psf":135,"total_budget_psf":168.49,"number_of_units":4,"scheme_type":"mli"},{"id":"CP018","project":"Enderby Logistics Park","location":"Leicester","region":"East Midlands","date":"2024-12-18","total_budget_cost":81483000,"total_gia_sqft":1131200,"base_build_psf":59.45,"total_budget_psf":72.03,"number_of_units":7,"scheme_type":"big_box"},{"id":"CP019","project":"M1 Junction 21","location":"Nottingham","region":"East Midlands","date":"2025-02-26","total_budget_cost":47594000,"total_gia_sqft":699675,"base_build_psf":57.3,"total_budget_psf":68.02,"number_of_units":3,"scheme_type":"big_box"},{"id":"CP020","project":"Bolney Grange","location":"Bolney","region":"South East","date":"2025-08-05","total_budget_cost":22271000,"total_gia_sqft":220265,"base_build_psf":88.87,"total_budget_psf":101.11,"number_of_units":10,"scheme_type":"mli"},{"id":"CP021","project":"Gloucester Business Park","location":"Gloucester","region":"South West","date":"2025-09-25","total_budget_cost":37323000,"total_gia_sqft":338145,"base_build_psf":91.64,"total_budget_psf":110.37,"number_of_units":11,"scheme_type":"mid_box"},{"id":"CP022","project":"Blackhorse Lane","location":"Walthamstow","region":"London","date":"2025-10-24","total_budget_cost":19711000,"total_gia_sqft":162437,"base_build_psf":108.84,"total_budget_psf":121.33,"number_of_units":9,"scheme_type":"mli"},{"id":"CP023","project":"Barton Dock","location":"Manchester","region":"North West","date":"2025-12-03","total_budget_cost":18061000,"total_gia_sqft":177385,"base_build_psf":85.23,"total_budget_psf":101.82,"number_of_units":4,"scheme_type":"mid_box"},{"id":"CP024","project":"Tolpits Lane","location":"Watford","region":"South East","date":"2025-12-08","total_budget_cost":11613000,"total_gia_sqft":76500,"base_build_psf":126.39,"total_budget_psf":151.81,"number_of_units":8,"scheme_type":"mli"},{"id":"CP025","project":"Banbury","location":"Ruscote Avenue","region":"South East","date":"2026-01-27","total_budget_cost":43968000,"total_gia_sqft":439170,"base_build_psf":81.79,"total_budget_psf":100.12,"number_of_units":13,"scheme_type":"mid_box"},{"id":"CP026","project":"Kings Road","location":"Birmingham","region":"West Midlands","date":"2026-02-06","total_budget_cost":8606000,"total_gia_sqft":79295,"base_build_psf":94.07,"total_budget_psf":108.53,"number_of_units":4,"scheme_type":"mli"},{"id":"CP027","project":"Britannia Road","location":"Waltham Cross","region":"London","date":"2026-02-20","total_budget_cost":9218000,"total_gia_sqft":75870,"base_build_psf":95.97,"total_budget_psf":121.5,"number_of_units":4,"scheme_type":"mli"}];
+        
+        function showTab(tabId) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+            if (tabId === 'insights') initInsightCharts();
+            if (tabId === 'trends') initTrendCharts();
+            if (tabId === 'data') populateRawData();
+        }
+        
+        function populateRawData() {
+            const tbody = document.getElementById('rawDataBody');
+            const typeFilter = document.getElementById('filterType').value;
+            const regionFilter = document.getElementById('filterRegion').value;
+            const searchFilter = document.getElementById('filterSearch').value.toLowerCase();
+            
+            const filtered = costPlans.filter(p => {
+                if (typeFilter && p.scheme_type !== typeFilter) return false;
+                if (regionFilter && p.region !== regionFilter) return false;
+                if (searchFilter && !p.project.toLowerCase().includes(searchFilter)) return false;
+                return true;
+            });
+            
+            tbody.innerHTML = filtered.map(p => `<tr>
+                <td>${p.date}</td>
+                <td>${p.project}</td>
+                <td>${p.region}</td>
+                <td>${p.scheme_type.replace('_', ' ')}</td>
+                <td class="num">${p.total_gia_sqft.toLocaleString()}</td>
+                <td class="num">${p.number_of_units}</td>
+                <td class="num">£${p.base_build_psf.toFixed(0)}</td>
+                <td class="num">£${p.total_budget_psf.toFixed(0)}</td>
+                <td class="num">£${(p.total_budget_cost/1000000).toFixed(1)}M</td>
+            </tr>`).join('');
+        }
+        
+        function filterTable() { populateRawData(); }
+        
+        function initInsightCharts() {
+            const ctx1 = document.getElementById('schemeTypeChart');
+            if (ctx1._chart) ctx1._chart.destroy();
+            ctx1._chart = new Chart(ctx1, {
+                type: 'bar',
+                data: { labels: ['Big Box', 'Mid Box', 'MLI', 'Multi-Storey'], datasets: [{ label: 'Base £/sqft', data: [59, 83, 107, 156], backgroundColor: '#3b82f6' }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, grid: { color: '#334155' }, ticks: { color: '#94a3b8', callback: v => '£'+v } }, x: { grid: { display: false }, ticks: { color: '#94a3b8' } } } }
+            });
+            
+            const ctx2 = document.getElementById('regionChart');
+            if (ctx2._chart) ctx2._chart.destroy();
+            ctx2._chart = new Chart(ctx2, {
+                type: 'bar',
+                data: { labels: ['London', 'South East', 'West Mids', 'North West', 'East Mids'], datasets: [{ label: 'Base £/sqft', data: [105, 86, 82, 80, 62], backgroundColor: '#3b82f6' }] },
+                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, grid: { color: '#334155' }, ticks: { color: '#94a3b8', callback: v => '£'+v } }, y: { grid: { display: false }, ticks: { color: '#94a3b8' } } } }
+            });
+        }
+        
+        function initTrendCharts() {
+            const ctx1 = document.getElementById('inflationChart');
+            if (ctx1._chart) ctx1._chart.destroy();
+            ctx1._chart = new Chart(ctx1, {
+                type: 'line',
+                data: { labels: ['Q4 22', 'Q1 23', 'Q2 23', 'Q3 23', 'Q4 23', 'Q1 24', 'Q2 24', 'Q3 24', 'Q4 24', 'Q1 25', 'Q2 25', 'Q3 25', 'Q4 25', 'Q1 26'], datasets: [{ label: 'Base £/sqft', data: [75, 77, 79, 81, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92], borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.1)', fill: true, tension: 0.3 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 70, max: 100, grid: { color: '#334155' }, ticks: { color: '#94a3b8', callback: v => '£'+v } }, x: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } } } }
+            });
+            
+            const ctx2 = document.getElementById('unitSizeChart');
+            if (ctx2._chart) ctx2._chart.destroy();
+            const scatter = costPlans.filter(p => p.base_build_psf > 0).map(p => ({ x: p.total_gia_sqft / p.number_of_units, y: p.base_build_psf }));
+            ctx2._chart = new Chart(ctx2, {
+                type: 'scatter',
+                data: { datasets: [{ label: 'Cost Plans', data: scatter, backgroundColor: '#3b82f6', pointRadius: 5 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: 'Avg Unit Size (sqft)', color: '#94a3b8' }, grid: { color: '#334155' }, ticks: { color: '#94a3b8', callback: v => (v/1000)+'k' } }, y: { title: { display: true, text: 'Base £/sqft', color: '#94a3b8' }, grid: { color: '#334155' }, ticks: { color: '#94a3b8', callback: v => '£'+v } } } }
+            });
+        }
+        
+        // Initialize
+        initInsightCharts();
+    </script>
+</body>
+</html>
