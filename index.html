@@ -53,7 +53,7 @@
         .bcis-value { font-weight: 600; }
         .bcis-value.evo { color: #f97316; }
         .bcis-value.bcis { color: #a78bfa; }
-        .table-scroll { max-height: 500px; overflow-y: auto; }
+        .table-scroll { max-height: 800px; overflow-y: auto; }
         .filter-bar { display: flex; gap: 15px; margin-bottom: 20px; align-items: center; flex-wrap: wrap; }
         .filter-bar select, .filter-bar input { padding: 8px 12px; border: 1px solid #475569; border-radius: 6px; background: #0f172a; color: #f1f5f9; font-size: 0.9rem; }
         .filter-bar select { min-width: 140px; }
@@ -358,6 +358,7 @@
                             <option value="North West">North West</option>
                         </select>
                         <input type="text" id="filterSearch" placeholder="Search projects..." oninput="filterTable()">
+                        <span id="rowCount" style="color: #64748b; font-size: 0.85rem;"></span>
                     </div>
                     <div class="table-scroll">
                         <table class="data-table" id="rawDataTable">
@@ -397,6 +398,7 @@
                 return true;
             });
             
+            document.getElementById('rowCount').textContent = `Showing ${filtered.length} of ${costPlans.length} plans`;
             tbody.innerHTML = filtered.map(p => `<tr>
                 <td>${p.date}</td>
                 <td>${p.project}</td>
