@@ -1,6 +1,6 @@
 {
   "extraction_date": "2026-03-11",
-  "total_processed": 107,
+  "total_processed": 116,
   "cost_plans": [
     {
       "file": "23003 EVO BOW 230104 Feasibility Estimate01 ISSUE.pdf",
@@ -1611,20 +1611,34 @@
       "site_acreage": 5.64,
       "scheme_type": "mid_box",
       "avg_unit_sqft": 128950
+    },
+    {
+      "file": "23003 EVO South Cresent Canning Town 230912 Feasibility Estimate ISSUE.pdf",
+      "date": "2023-09-12",
+      "project_name": "South Crescent",
+      "location": "Canning Town",
+      "total_budget_cost": 4722000,
+      "total_gia_sqft": 41845,
+      "base_build_psf": 94.0,
+      "total_budget_psf": 112.88,
+      "number_of_units": 1,
+      "site_acreage": 1.41,
+      "scheme_type": "mid_box",
+      "avg_unit_sqft": 41845
     }
   ],
   "summary": {
-    "total_cost_plans": 107,
+    "total_cost_plans": 116,
     "scheme_types": {
       "big_box": 14,
-      "mid_box": 58,
+      "mid_box": 59,
       "mli": 41,
       "multi_storey": 2
     },
-    "avg_total_budget_psf": 108.72,
-    "avg_base_build_psf": 84.56,
-    "total_gia_sqft_all_projects": 22814553,
-    "total_budget_all_projects": 2470766378,
+    "avg_total_budget_psf": 113.12,
+    "avg_base_build_psf": 89.96,
+    "total_gia_sqft_all_projects": 29960413,
+    "total_budget_all_projects": 3256920205,
     "date_range": {
       "earliest": "2022-10-12",
       "latest": "2026-02-20"
