@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cost Intelligence | Evo Lake</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-bottom: 1px solid #334155;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { font-size: 1.25rem; font-weight: 600; color: #f8fafc; }
+        .logo span { color: #3b82f6; }
+        .header-meta { font-size: 0.8rem; color: #64748b; }
+        
+        .tabs {
+            display: flex;
+            gap: 0;
+            padding: 0 40px;
+            background: #1e293b;
+            border-bottom: 1px solid #334155;
+        }
+        .tab {
+            padding: 14px 24px;
+            cursor: pointer;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .tab:hover { color: #e2e8f0; }
+        .tab.active { color: #3b82f6; border-bottom-color: #3b82f6; }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 30px 40px; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        .grid { display: grid; grid-template-columns: 400px 1fr; gap: 30px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+        @media (max-width: 1000px) { .grid, .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+        
+        .panel {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+        }
+        .panel-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #334155;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #f1f5f9;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .panel-header .badge {
+            background: #3b82f6;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+        .panel-body { padding: 20px; }
+        
+        .form-group { margin-bottom: 18px; }
+        .form-group label { 
+            display: block; 
+            font-size: 0.8rem; 
+            color: #94a3b8; 
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        select, input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #475569;
+            border-radius: 6px;
+            background: #0f172a;
+            color: #f1f5f9;
+            font-size: 0.95rem;
+        }
+        select:focus, input:focus { outline: none; border-color: #3b82f6; }
+        
+        .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+        .checkbox-item:hover { border-color: #475569; }
+        .checkbox-item input { width: 16px; height: 16px; cursor: pointer; }
+        
+        .upload-zone {
+            border: 2px dashed #475569;
+            border-radius: 8px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 20px;
+        }
+        .upload-zone:hover { border-color: #3b82f6; background: rgba(59, 130, 246, 0.05); }
+        .upload-zone.active { border-color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
+        .upload-zone input { display: none; }
+        .upload-icon { font-size: 2rem; margin-bottom: 10px; color: #64748b; }
+        .upload-text { color: #94a3b8; font-size: 0.9rem; }
+        .upload-text strong { color: #3b82f6; }
+        .upload-hint { color: #64748b; font-size: 0.75rem; margin-top: 8px; }
+        
+        .result-panel { background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%); }
+        
+        .result-main {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .result-value { font-size: 3rem; font-weight: 700; color: #f8fafc; }
+        .result-psf { font-size: 1.25rem; color: #94a3b8; }
+        
+        .confidence-bar {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding: 12px 16px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 6px;
+        }
+        .confidence-label { font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; }
+        .confidence-meter {
+            flex: 1;
+            height: 8px;
+            background: #334155;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .confidence-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+        .confidence-fill.high { background: #22c55e; }
+        .confidence-fill.medium { background: #eab308; }
+        .confidence-fill.low { background: #ef4444; }
+        .confidence-value { 
+            font-size: 0.9rem; 
+            font-weight: 600;
+            min-width: 45px;
+            text-align: right;
+        }
+        
+        .breakdown-table { width: 100%; }
+        .breakdown-table tr { border-bottom: 1px solid #334155; }
+        .breakdown-table tr:last-child { border: none; }
+        .breakdown-table td { padding: 10px 0; font-size: 0.9rem; }
+        .breakdown-table td:first-child { color: #94a3b8; }
+        .breakdown-table td:last-child { text-align: right; font-weight: 500; }
+        
+        .range-bar {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #334155;
+        }
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+        .range-track {
+            height: 6px;
+            background: #334155;
+            border-radius: 3px;
+            position: relative;
+        }
+        .range-fill {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 3px;
+        }
+        .range-marker {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #f8fafc;
+            border-radius: 50%;
+            top: -3px;
+            transform: translateX(-50%);
+        }
+        
+        /* Insight Cards */
+        .insight-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .insight-card h3 {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+        .insight-value {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #f8fafc;
+            margin-bottom: 4px;
+        }
+        .insight-label {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+        .insight-sub {
+            font-size: 0.75rem;
+            color: #475569;
+            margin-top: 4px;
+        }
+        .insight-trend {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.8rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        .insight-trend.up { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+        .insight-trend.down { background: rgba(34, 197, 94, 0.2); color: #86efac; }
+        .insight-trend.neutral { background: rgba(148, 163, 184, 0.2); color: #94a3b8; }
+        
+        .cost-type-badge {
+            display: inline-block;
+            background: #0ea5e9;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        .data-table th {
+            text-align: left;
+            padding: 12px 15px;
+            background: #0f172a;
+            border-bottom: 2px solid #334155;
+            color: #94a3b8;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.03em;
+            position: sticky;
+            top: 0;
+        }
+        .data-table th.num { text-align: right; }
+        .data-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #1e293b;
+        }
+        .data-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+        .data-table tr:hover td { background: rgba(59, 130, 246, 0.05); }
+        .data-table .sortable { cursor: pointer; }
+        .data-table .sortable:hover { color: #3b82f6; }
+        
+        .table-scroll { max-height: 600px; overflow-y: auto; }
+        
+        .bar-inline {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .bar-track {
+            flex: 1;
+            height: 8px;
+            background: #334155;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            border-radius: 4px;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-top: 20px;
+        }
+        .chart-container.small { height: 200px; }
+        
+        .abnormal-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .abnormal-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: #0f172a;
+            border-radius: 6px;
+        }
+        .abnormal-name { color: #e2e8f0; }
+        .abnormal-range { color: #3b82f6; font-weight: 600; }
+        
+        .bcis-compare {
+            display: flex;
+            gap: 30px;
+            padding: 20px;
+            background: #0f172a;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .bcis-col { flex: 1; }
+        .bcis-col h4 { 
+            font-size: 0.8rem; 
+            color: #94a3b8; 
+            margin-bottom: 15px; 
+            text-transform: uppercase;
+        }
+        .bcis-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #1e293b;
+        }
+        .bcis-row:last-child { border: none; }
+        .bcis-label { color: #94a3b8; }
+        .bcis-value { font-weight: 600; }
+        .bcis-value.evo { color: #3b82f6; }
+        .bcis-value.bcis { color: #a78bfa; }
+        
+        .add-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr auto;
+            gap: 15px;
+            align-items: end;
+            padding: 20px;
+            background: #0f172a;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .add-form .form-group { margin: 0; }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .btn-primary { background: #3b82f6; color: white; }
+        .btn-primary:hover { background: #2563eb; }
+        .btn-secondary { background: #475569; color: white; }
+        .btn-secondary:hover { background: #64748b; }
+        
+        .filter-bar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        .filter-bar select { width: auto; min-width: 150px; }
+        .filter-bar input[type="text"] { width: 250px; }
+        
+        .stats-banner {
+            display: flex;
+            gap: 30px;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .stats-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .stats-value { font-size: 1.5rem; font-weight: 700; color: #f8fafc; }
+        .stats-label { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; }
+        
+        #analysisResult { display: none; margin-top: 20px; padding: 15px; background: #0f172a; border-radius: 6px; }
+        #analysisResult.visible { display: block; }
+        
+        .success-msg {
+            padding: 10px 15px;
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid #22c55e;
+            border-radius: 6px;
+            color: #86efac;
+            margin-bottom: 15px;
+            display: none;
+        }
+        .success-msg.visible { display: block; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Evo<span>Lake</span> Cost Intelligence</div>
+        <div class="header-meta" id="headerMeta">115 cost plans | Oct 2022 - Feb 2026 | £3.25B total value</div>
+    </div>
+    
+    <div class="tabs">
+        <div class="tab active" onclick="showTab('insights')">Key Insights</div>
+        <div class="tab" onclick="showTab('estimator')">Cost Estimator</div>
+        <div class="tab" onclick="showTab('trends')">Trends & Inflation</div>
+        <div class="tab" onclick="showTab('data')">Raw Data</div>
+    </div>
+    
+    <!-- TAB 1: KEY INSIGHTS (DEFAULT) -->
+    <div id="tab-insights" class="tab-content active">
+        <div class="container">
+            <p style="color: #94a3b8; margin-bottom: 25px; font-size: 0.9rem;">
+                All costs shown are <strong style="color: #0ea5e9;">Base Construction Costs</strong> (shell build + prelims + OHP), 
+                excluding abnormals, contingency, and professional fees unless stated otherwise.
+            </p>
+            
+            <div class="grid-4" style="margin-bottom: 30px;">
+                <div class="insight-card">
+                    <h3>Big Box<span class="cost-type-badge">Base</span></h3>
+                    <div class="insight-value" id="bigBoxAvg">£61</div>
+                    <div class="insight-label">per sq ft (shell)</div>
+                    <div class="insight-sub">200k+ sq ft/unit | 5 plans</div>
+                </div>
+                <div class="insight-card">
+                    <h3>Mid Box<span class="cost-type-badge">Base</span></h3>
+                    <div class="insight-value" id="midBoxAvg">£85</div>
+                    <div class="insight-label">per sq ft (shell)</div>
+                    <div class="insight-sub">30-200k sq ft/unit | 13 plans</div>
+                </div>
+                <div class="insight-card">
+                    <h3>MLI<span class="cost-type-badge">Base</span></h3>
+                    <div class="insight-value" id="mliAvg">£103</div>
+                    <div class="insight-label">per sq ft (shell)</div>
+                    <div class="insight-sub">&lt;30k sq ft/unit | 13 plans</div>
+                </div>
+                <div class="insight-card">
+                    <h3>Multi-Storey<span class="cost-type-badge">Base</span></h3>
+                    <div class="insight-value" id="msAvg">£122</div>
+                    <div class="insight-label">per sq ft (shell)</div>
+                    <div class="insight-sub">Stacked industrial | 2 plans</div>
+                </div>
+            </div>
+            
+            <div class="grid-2">
+                <div class="panel">
+                    <div class="panel-header">
+                        Base Construction Cost by Scheme Type
+                        <span class="badge">KAM Data</span>
+                    </div>
+                    <div class="panel-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="num">Plans</th>
+                                    <th class="num">Base £/sq ft</th>
+                                    <th class="num">All-In £/sq ft</th>
+                                </tr>
+                            </thead>
+                            <tbody id="schemeTypeTable">
+                            </tbody>
+                        </table>
+                        <div class="chart-container small">
+                            <canvas id="schemeTypeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel">
+                    <div class="panel-header">
+                        Base Construction Cost by Region
+                        <span class="badge">KAM Data</span>
+                    </div>
+                    <div class="panel-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Region</th>
+                                    <th class="num">Plans</th>
+                                    <th class="num">Base £/sq ft</th>
+                                    <th class="num">vs Midlands</th>
+                                </tr>
+                            </thead>
+                            <tbody id="regionTable">
+                            </tbody>
+                        </table>
+                        <div class="chart-container small">
+                            <canvas id="regionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel" style="margin-top: 30px;">
+                <div class="panel-header">Evo Lake vs BCIS Benchmarks</div>
+                <div class="panel-body">
+                    <p style="color: #94a3b8; margin-bottom: 15px; font-size: 0.85rem;">
+                        BCIS data from Q1 2026. Our data reflects actual KAM cost plans; BCIS reflects industry-wide averages.
+                    </p>
+                    <div class="bcis-compare">
+                        <div class="bcis-col">
+                            <h4>Distribution / Big Box</h4>
+                            <div class="bcis-row">
+                                <span class="bcis-label">Evo Lake (KAM)</span>
+                                <span class="bcis-value evo">£61/sq ft base</span>
+                            </div>
+                            <div class="bcis-row">
+                                <span class="bcis-label">BCIS Average</span>
+                                <span class="bcis-value bcis">£51/sq ft</span>
+                            </div>
+                            <div class="bcis-row">
+                                <span class="bcis-label">Variance</span>
+                                <span class="bcis-value">+20%</span>
+                            </div>
+                        </div>
+                        <div class="bcis-col">
+                            <h4>General Industrial</h4>
+                            <div class="bcis-row">
+                                <span class="bcis-label">Evo Lake (KAM)</span>
+                                <span class="bcis-value evo">£85/sq ft base</span>
+                            </div>
+                            <div class="bcis-row">
+                                <span class="bcis-label">BCIS Average</span>
+                                <span class="bcis-value bcis">£105/sq ft</span>
+                            </div>
+                            <div class="bcis-row">
+                                <span class="bcis-label">Variance</span>
+                                <span class="bcis-value" style="color: #22c55e;">-19%</span>
+                            </div>
+                        </div>
+                        <div class="bcis-col">
+                            <h4>MLI / Small Units</h4>
+                            <div class="bcis-row">
+                                <span class="bcis-label">Evo Lake (KAM)</span>
+                                <span class="bcis-value evo">£103/sq ft base</span>
+                            </div>
+                            <div class="bcis-row">
+                                <span class="bcis-label">BCIS Average</span>
+                                <span class="bcis-value bcis">£105/sq ft</span>
+                            </div>
+                            <div class="bcis-row">
+                                <span class="bcis-label">Variance</span>
+                                <span class="bcis-value" style="color: #22c55e;">-2%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="color: #64748b; font-size: 0.75rem; margin-top: 15px;">
+                        Note: BCIS distribution figure (£51/sq ft) based on 10,000sqm+ units. Evo Lake big box average skewed higher due to London-heavy sample (Thamesmead). 
+                        BCIS general industrial = £1,130/sqm (£105/sq ft) from CostModelling/BCIS Q1 2026.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="panel" style="margin-top: 30px;">
+                <div class="panel-header">Typical Abnormal Cost Ranges</div>
+                <div class="panel-body">
+                    <p style="color: #94a3b8; margin-bottom: 20px; font-size: 0.85rem;">
+                        Add these to base construction costs. Derived from KAM cost plan abnormal sections.
+                    </p>
+                    <div class="grid-3">
+                        <div>
+                            <h4 style="color: #f1f5f9; font-size: 0.85rem; margin-bottom: 15px;">Standard (Typically Included)</h4>
+                            <div class="abnormal-list">
+                                <div class="abnormal-item">
+                                    <span class="abnormal-name">PV Installation (EPC A+)</span>
+                                    <span class="abnormal-range">£2-4/sq ft</span>
+                                </div>
+                                <div class="abnormal-item">
+                                    <span class="abnormal-name">Attenuation / SUDS</span>
+                                    <span class="abnormal-range">£2-4/sq ft</span>
+                                </div>
+                                <div class="abnormal-item">
+                                    <span class="abnormal-name">Landscaping (10% BNG)</span>
+                                    <span class="abnormal-range">£1-3/sq ft</span>
+                                </div>
+                                <div class="abnormal-item">
+                                    <span class="abnormal-name">EV Charging (20% active)</span>
+                                    <span class="abnormal-range">£0.5-1/sq ft</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 style="color: #f1f5f9; font-size: 0.85rem; margin-bottom: 15px;">Site-Specific Abnormals</h4>
+                            <div class="abnormal-list">
+                                <div class="abnormal-item">
+                                    <span class="abnormal-name">Demolition</span>
+                                    <span class="abnormal-range">£4-8/sq ft</span>
+                                </div>
+                                <div class="abnormal-item">
+                                    <span class="abnormal-name">Ground Improvement (CMCs)</span>
+                                    <span class="abnormal-range">£3-6/sq ft</span>
+                                </div>
+                                <div class="abnormal-item">
+                                    <span class="abnormal-name">Contamination Remediation</span>
+                                    <span class="abnormal-range">£5-15/sq ft</span>
+                                </div>
+                                <div class="abnormal-item">
+                                    <span class="abnormal-name">Flood Mitigation</span>
+                                    <span class="abnormal-range">£4-8/sq ft</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 style="color: #f1f5f9; font-size: 0.85rem; margin-bottom: 15px;">Infrastructure (Lump Sum)</h4>
+                            <div class="abnormal-list">
+                                <div class="abnormal-item">
+                                    <span class="abnormal-name">Substation (1nr)</span>
+                                    <span class="abnormal-range">£150-250k</span>
+                                </div>
+                                <div class="abnormal-item">
+                                    <span class="abnormal-name">HV Connection</span>
+                                    <span class="abnormal-range">£50-150k</span>
+                                </div>
+                                <div class="abnormal-item">
+                                    <span class="abnormal-name">Sewer Diversion</span>
+                                    <span class="abnormal-range">£200-500k</span>
+                                </div>
+                                <div class="abnormal-item">
+                                    <span class="abnormal-name">S278 Highway Works</span>
+                                    <span class="abnormal-range">£100k-1M+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel" style="margin-top: 30px;">
+                <div class="panel-header">Unit Size Impact on Base Cost</div>
+                <div class="panel-body">
+                    <p style="color: #94a3b8; margin-bottom: 20px; font-size: 0.85rem;">
+                        Larger units = lower £/sq ft due to economies of scale. Each 10,000 sq ft increase reduces base cost by ~£1.50/sq ft.
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="unitSizeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- TAB 2: ESTIMATOR -->
+    <div id="tab-estimator" class="tab-content">
+        <div class="container">
+            <div class="grid">
+                <!-- Input Panel -->
+                <div class="panel">
+                    <div class="panel-header">Scheme Parameters</div>
+                    <div class="panel-body">
+                        
