@@ -61,6 +61,29 @@
         .stats-item { display: flex; flex-direction: column; }
         .stats-value { font-size: 1.5rem; font-weight: 700; color: #f8fafc; }
         .stats-label { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 0.8rem; color: #94a3b8; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.03em; }
+        .form-group select, .form-group input[type="number"] { width: 100%; padding: 10px 14px; border: 1px solid #475569; border-radius: 6px; background: #0f172a; color: #f1f5f9; font-size: 0.95rem; }
+        .form-group select:focus, .form-group input:focus { outline: none; border-color: #3b82f6; }
+        .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .checkbox-item { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: #0f172a; border-radius: 5px; font-size: 0.85rem; color: #e2e8f0; cursor: pointer; }
+        .checkbox-item input { width: 16px; height: 16px; accent-color: #3b82f6; }
+        .checkbox-item span { margin-left: auto; color: #64748b; font-size: 0.75rem; }
+        .calc-btn { width: 100%; padding: 14px; background: #3b82f6; color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 20px; }
+        .calc-btn:hover { background: #2563eb; }
+        .est-results { }
+        .est-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #334155; }
+        .est-row:last-child { border: none; }
+        .est-label { color: #94a3b8; }
+        .est-value { font-weight: 600; color: #f8fafc; font-variant-numeric: tabular-nums; }
+        .est-value.highlight { color: #3b82f6; font-size: 1.25rem; }
+        .est-total { background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%); padding: 20px; border-radius: 8px; margin-top: 15px; text-align: center; }
+        .est-total-label { font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px; }
+        .est-total-value { font-size: 2.5rem; font-weight: 700; color: #f8fafc; }
+        .est-confidence { display: flex; align-items: center; gap: 10px; margin-top: 20px; padding: 12px; background: #0f172a; border-radius: 6px; }
+        .conf-bar { flex: 1; height: 8px; background: #334155; border-radius: 4px; overflow: hidden; }
+        .conf-fill { height: 100%; border-radius: 4px; }
+        .conf-label { font-size: 0.8rem; color: #94a3b8; min-width: 80px; }
     </style>
 </head>
 <body>
@@ -70,13 +93,91 @@
     </div>
     
     <div class="tabs">
-        <div class="tab active" onclick="showTab('insights')">Key Insights</div>
+        <div class="tab active" onclick="showTab('estimator')">Estimator</div>
+        <div class="tab" onclick="showTab('insights')">Key Insights</div>
         <div class="tab" onclick="showTab('trends')">Trends</div>
         <div class="tab" onclick="showTab('data')">Raw Data</div>
     </div>
     
+    <!-- TAB 0: ESTIMATOR -->
+    <div id="tab-estimator" class="tab-content active">
+        <div class="container">
+            <div class="grid-2">
+                <!-- Input Panel -->
+                <div class="panel">
+                    <div class="panel-header">Scheme Parameters</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label>Region</label>
+                            <select id="estRegion">
+                                <option value="london">London (+30%)</option>
+                                <option value="south_east">South East (+15%)</option>
+                                <option value="west_midlands">West Midlands (+5%)</option>
+                                <option value="north_west">North West (-5%)</option>
+                                <option value="east_midlands" selected>East Midlands (Base)</option>
+                                <option value="east_of_england">East of England (+10%)</option>
+                                <option value="south_west">South West (+5%)</option>
+                                <option value="north_east">North East (-10%)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Scheme Type</label>
+                            <select id="estType">
+                                <option value="big_box">Big Box (&gt;150k sqft/unit)</option>
+                                <option value="mid_box" selected>Mid Box (30-150k sqft/unit)</option>
+                                <option value="mli">MLI (&lt;30k sqft/unit)</option>
+                                <option value="multi_storey">Multi-Storey (Stacked)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Total GIA (sq ft)</label>
+                            <input type="number" id="estGIA" value="100000" min="1000" step="1000">
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Units</label>
+                            <input type="number" id="estUnits" value="4" min="1" max="50">
+                        </div>
+                        
+                        <div class="form-group" style="margin-top: 25px;">
+                            <label>Abnormal Costs (add to base)</label>
+                            <div class="checkbox-grid">
+                                <label class="checkbox-item"><input type="checkbox" id="abnPV" checked> PV (EPC A+) <span>+£3/sqft</span></label>
+                                <label class="checkbox-item"><input type="checkbox" id="abnSUDS" checked> SUDS/Attenuation <span>+£3/sqft</span></label>
+                                <label class="checkbox-item"><input type="checkbox" id="abnEV"> EV Charging <span>+£1/sqft</span></label>
+                                <label class="checkbox-item"><input type="checkbox" id="abnDemo"> Demolition <span>+£6/sqft</span></label>
+                                <label class="checkbox-item"><input type="checkbox" id="abnGround"> Abnormal Ground <span>+£5/sqft</span></label>
+                                <label class="checkbox-item"><input type="checkbox" id="abnContam"> Contamination <span>+£10/sqft</span></label>
+                            </div>
+                        </div>
+                        
+                        <button class="calc-btn" onclick="calculateEstimate()">Calculate Estimate</button>
+                    </div>
+                </div>
+                
+                <!-- Results Panel -->
+                <div class="panel">
+                    <div class="panel-header">Cost Estimate</div>
+                    <div class="panel-body">
+                        <div id="estResults" class="est-results">
+                            <p style="color: #64748b; text-align: center; padding: 40px 0;">Enter parameters and click Calculate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel" style="margin-top: 20px;">
+                <div class="panel-header">Methodology</div>
+                <div class="panel-body" style="color: #94a3b8; font-size: 0.85rem; line-height: 1.6;">
+                    <p><strong>Base costs</strong> include shell build, prelims, and OHP — excludes abnormals, contingency, and professional fees.</p>
+                    <p style="margin-top: 10px;"><strong>Regional adjustments</strong> based on 116 KAM cost plans (Oct 2022 – Feb 2026). East Midlands used as base.</p>
+                    <p style="margin-top: 10px;"><strong>Confidence:</strong> Higher for scheme types/regions with more data points. Big Box and Mid Box have strongest coverage.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- TAB 1: KEY INSIGHTS -->
-    <div id="tab-insights" class="tab-content active">
+    <div id="tab-insights" class="tab-content">
         <div class="container">
             <p style="color: #94a3b8; margin-bottom: 25px; font-size: 0.9rem;">
                 All costs shown are <strong style="color: #0ea5e9;">Base Construction Costs</strong> (shell build + prelims + OHP), excluding abnormals, contingency, and professional fees.
@@ -289,6 +390,7 @@
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
             document.getElementById(`tab-${tabId}`).classList.add('active');
+            if (tabId === 'estimator') calculateEstimate();
             if (tabId === 'insights') initInsightCharts();
             if (tabId === 'trends') initTrendCharts();
             if (tabId === 'data') populateRawData();
@@ -359,8 +461,65 @@
             });
         }
         
+        // Base costs by type (East Midlands baseline)
+        const baseCosts = { big_box: 59, mid_box: 83, mli: 107, multi_storey: 156 };
+        const allInCosts = { big_box: 85, mid_box: 105, mli: 130, multi_storey: 191 };
+        const regionMults = { london: 1.30, south_east: 1.15, west_midlands: 1.05, north_west: 0.95, east_midlands: 1.0, east_of_england: 1.10, south_west: 1.05, north_east: 0.90 };
+        const typeDataPoints = { big_box: 14, mid_box: 59, mli: 41, multi_storey: 2 };
+        const regionDataPoints = { london: 35, south_east: 58, west_midlands: 3, north_west: 4, east_midlands: 8, east_of_england: 3, south_west: 2, north_east: 3 };
+        
+        function calculateEstimate() {
+            const region = document.getElementById('estRegion').value;
+            const type = document.getElementById('estType').value;
+            const gia = parseFloat(document.getElementById('estGIA').value) || 0;
+            const units = parseInt(document.getElementById('estUnits').value) || 1;
+            
+            // Calculate abnormals
+            let abnormalPsf = 0;
+            if (document.getElementById('abnPV').checked) abnormalPsf += 3;
+            if (document.getElementById('abnSUDS').checked) abnormalPsf += 3;
+            if (document.getElementById('abnEV').checked) abnormalPsf += 1;
+            if (document.getElementById('abnDemo').checked) abnormalPsf += 6;
+            if (document.getElementById('abnGround').checked) abnormalPsf += 5;
+            if (document.getElementById('abnContam').checked) abnormalPsf += 10;
+            
+            // Calculate costs
+            const basePsf = baseCosts[type] * regionMults[region];
+            const allInPsf = allInCosts[type] * regionMults[region];
+            const totalPsfWithAbnormals = allInPsf + abnormalPsf;
+            const totalBudget = totalPsfWithAbnormals * gia;
+            const avgUnitSize = gia / units;
+            
+            // Confidence based on data points
+            const typeConf = Math.min(typeDataPoints[type] / 15, 1);
+            const regionConf = Math.min(regionDataPoints[region] / 20, 1);
+            const overallConf = (typeConf + regionConf) / 2;
+            const confPct = Math.round(overallConf * 100);
+            const confColor = confPct >= 70 ? '#22c55e' : confPct >= 40 ? '#eab308' : '#ef4444';
+            const confLabel = confPct >= 70 ? 'High' : confPct >= 40 ? 'Medium' : 'Low';
+            
+            document.getElementById('estResults').innerHTML = `
+                <div class="est-row"><span class="est-label">Base Build Cost</span><span class="est-value">£${basePsf.toFixed(0)}/sqft</span></div>
+                <div class="est-row"><span class="est-label">All-In (excl. abnormals)</span><span class="est-value">£${allInPsf.toFixed(0)}/sqft</span></div>
+                <div class="est-row"><span class="est-label">+ Abnormals</span><span class="est-value">£${abnormalPsf}/sqft</span></div>
+                <div class="est-row"><span class="est-label">Total Cost</span><span class="est-value highlight">£${totalPsfWithAbnormals.toFixed(0)}/sqft</span></div>
+                <div class="est-row"><span class="est-label">Avg Unit Size</span><span class="est-value">${avgUnitSize.toLocaleString()} sqft</span></div>
+                
+                <div class="est-total">
+                    <div class="est-total-label">Estimated Total Budget</div>
+                    <div class="est-total-value">£${(totalBudget / 1000000).toFixed(2)}M</div>
+                </div>
+                
+                <div class="est-confidence">
+                    <span class="conf-label">Confidence: ${confLabel}</span>
+                    <div class="conf-bar"><div class="conf-fill" style="width: ${confPct}%; background: ${confColor};"></div></div>
+                </div>
+            `;
+        }
+        
         // Initialize
-        initInsightCharts();
+        calculateEstimate();
+        // Don't init charts on load - wait for tab switch
     </script>
 </body>
 </html>
